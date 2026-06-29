@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -35,9 +36,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group" id="nav-logo">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center font-bold text-white text-lg transition-transform duration-300 group-hover:scale-110">
-            C
-          </div>
+          <Image
+            src="/logo.png"
+            alt="Calcify International Logo"
+            width={40}
+            height={40}
+            className="w-10 h-10 rounded-xl transition-transform duration-300 group-hover:scale-110 object-contain"
+          />
           <div>
             <span className="text-xl font-bold tracking-tight text-white">
               Calcify
