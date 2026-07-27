@@ -1,9 +1,10 @@
 import Section from "@/components/ui/Section";
+import CaseMedia from "@/components/ui/CaseMedia";
 import { work } from "@/lib/content";
 
 /**
- * Asymmetric layout — one flagship card (Global Banking Platform) spanning
- * full width, with the remaining three below. See Section 4.
+ * Asymmetric layout — one flagship case, then the remaining three.
+ * Media-forward: each card leads with its visual.
  */
 export default function Work() {
   const [flagship, ...rest] = work;
@@ -15,48 +16,60 @@ export default function Work() {
       title="Systems running in production, at scale"
       intro="A sample of platforms we've delivered for enterprise clients across finance, healthcare, public infrastructure, and retail."
     >
-      <div className="grid gap-px bg-line/50">
-        {/* Flagship */}
-        <article className="bg-panel/55 backdrop-blur-[10px] p-8 sm:p-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="eyebrow text-signal">{flagship.category}</p>
-              <h3 className="display mt-4 text-2xl sm:text-3xl lg:text-4xl text-ink">
-                {flagship.title}
-              </h3>
-              <p className="mt-5 text-sm sm:text-base leading-relaxed text-muted">
-                {flagship.body}
-              </p>
-            </div>
-            <div className="shrink-0 lg:text-right">
-              <p className="font-mono text-4xl font-medium tracking-tight text-pulse sm:text-5xl">
-                {flagship.metric}
-              </p>
-              <p className="eyebrow mt-2">{flagship.metricLabel}</p>
-            </div>
-          </div>
-        </article>
-
-        {/* Supporting three */}
-        <div className="grid gap-px bg-line/50 lg:grid-cols-3">
-          {rest.map((item) => (
-            <article key={item.title} className="bg-panel/55 backdrop-blur-[10px] p-8">
-              <p className="eyebrow text-signal">{item.category}</p>
-              <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                {item.body}
-              </p>
-              <p className="mt-6 border-t border-line pt-5">
-                <span className="font-mono text-2xl font-medium tracking-tight text-pulse">
-                  {item.metric}
-                </span>{" "}
-                <span className="eyebrow">{item.metricLabel}</span>
-              </p>
-            </article>
-          ))}
+      {/* Flagship */}
+      <article className="group grid gap-10 lg:grid-cols-2 lg:items-center">
+        <CaseMedia
+          src={flagship.media}
+          alt={flagship.mediaAlt}
+          label={flagship.title}
+          priority
+          className="aspect-[4/3] w-full"
+        />
+        <div>
+          <p className="eyebrow flex items-center gap-3 text-signal">
+            <span className="inline-block h-px w-6 bg-signal" />
+            {flagship.category}
+          </p>
+          <h3 className="display mt-5 text-3xl text-ink sm:text-4xl">
+            {flagship.title}
+          </h3>
+          <p className="mt-5 text-sm leading-relaxed text-muted sm:text-base">
+            {flagship.body}
+          </p>
+          <p className="mt-8 flex items-baseline gap-3 border-t border-line pt-6">
+            <span className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+              {flagship.metric}
+            </span>
+            <span className="eyebrow">{flagship.metricLabel}</span>
+          </p>
         </div>
+      </article>
+
+      {/* Supporting three */}
+      <div className="mt-20 grid gap-10 lg:grid-cols-3">
+        {rest.map((item) => (
+          <article key={item.title} className="group">
+            <CaseMedia
+              src={item.media}
+              alt={item.mediaAlt}
+              label={item.title}
+              className="aspect-[16/10] w-full"
+            />
+            <p className="eyebrow mt-6 text-signal">{item.category}</p>
+            <h3 className="mt-3 text-xl font-bold tracking-tight text-ink">
+              {item.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              {item.body}
+            </p>
+            <p className="mt-5 flex items-baseline gap-2.5 border-t border-line pt-4">
+              <span className="text-2xl font-bold tracking-tight text-ink">
+                {item.metric}
+              </span>
+              <span className="eyebrow">{item.metricLabel}</span>
+            </p>
+          </article>
+        ))}
       </div>
     </Section>
   );

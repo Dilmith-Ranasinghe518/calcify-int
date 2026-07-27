@@ -6,29 +6,29 @@
    Each entry generates utilities (--color-void -> bg-void / text-void / ...).
    ========================================================================= */
 @theme {
-  /* Surfaces — deep space, darker than before so the prism reads as light */
-  --color-void: #04050a;
-  --color-panel: #0a0c16;
-  --color-line: #1b1f33;
+  /* Surfaces — true black, high contrast */
+  --color-void: #020202;
+  --color-panel: #0b0b0d;
+  --color-line: #1f1f23;
 
   /* Text */
-  --color-ink: #f4f5fc;
-  --color-muted: #8e93ae;
+  --color-ink: #f5f5f6;
+  --color-muted: #8c8c93;
 
-  /* Iridescent spectrum — the prism's dispersion range.
+  /* A single red accent does all the signalling.
      Names kept (signal/pulse) so existing utility classes stay valid. */
-  --color-signal: #7c5cff; /* violet — primary */
-  --color-pulse: #22e4e0; /* cyan — hover / active */
-  --color-flare: #ff4fd8; /* magenta — third dispersion band, used sparingly */
-  --color-cta: #ffb454; /* amber — complementary pop, primary CTAs only */
+  --color-signal: #e8262e; /* red — accent, eyebrows, rules */
+  --color-pulse: #ff4a44; /* lighter red — hover / active */
+  --color-flare: #e8262e; /* alias, kept so older refs still resolve */
+  --color-cta: #ffffff; /* white pill — primary CTAs */
 
-  /* Type stacks — variables are injected by next/font in layout.tsx */
-  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  /* Type — Onest throughout, injected by next/font in layout.tsx */
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
 
-  /* Shape — precise/engineered, not soft SaaS */
-  --radius-card: 4px;
+  /* Shape */
+  --radius-card: 12px;
+  --radius-pill: 999px;
 
   /* Motion */
   --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* ~GSAP power2.out */
@@ -143,14 +143,43 @@ body {
   text-wrap: balance;
 }
 
-/* Eyebrow / data label — mono, per spec used only for labels and readouts */
+/* Eyebrow / label — uppercase and widely tracked, the nav/label voice */
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+/* Oversized ghost word behind the hero — the kinetic headline device.
+   Decorative: the real <h1> is always present and readable. */
+.ghost-word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+  font-size: clamp(3rem, 13vw, 11.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--color-ink) 16%, transparent);
+  user-select: none;
+}
+
+/* The word that is currently swapping in */
+.ghost-word-enter {
+  animation: ghost-in 620ms var(--ease-out-quad) both;
+}
+
+@keyframes ghost-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.18em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== SCROLL REVEAL — 300–400ms, 8–18px translateY, no bounce ===== */
@@ -184,19 +213,34 @@ body {
   opacity: 0.35;
 }
 
-/* Iridescent wash — violet through magenta, the prism's dispersion range. */
-.bg-signal-glow {
-  background:
+/* Page atmosphere — a fine hairline grid plus a single low red wash.
+   Replaces the WebGL canvas entirely: costs nothing and never blocks paint. */
+.bg-atmosphere {
+  background-image:
     radial-gradient(
-      ellipse 50% 45% at 20% 0%,
-      color-mix(in srgb, var(--color-signal) 22%, transparent) 0%,
-      transparent 70%
+      ellipse 60% 50% at 82% 0%,
+      color-mix(in srgb, var(--color-signal) 11%, transparent) 0%,
+      transparent 68%
     ),
-    radial-gradient(
-      ellipse 45% 40% at 80% 10%,
-      color-mix(in srgb, var(--color-flare) 14%, transparent) 0%,
-      transparent 70%
-    );
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    72px 72px,
+    72px 72px;
+  /* Grid fades out toward the bottom so it never competes with content. */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+  opacity: 0.5;
+}
+
+/* Restrained red wash — black stays black; the accent only warms the edges. */
+.bg-signal-glow {
+  background: radial-gradient(
+    ellipse 55% 45% at 78% 8%,
+    color-mix(in srgb, var(--color-signal) 13%, transparent) 0%,
+    transparent 72%
+  );
 }
 
 /* ===== MARQUEE (Trusted by) ===== */

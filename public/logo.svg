@@ -1,32 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Calcify International">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Calcify International">
   <title>Calcify International</title>
   <!--
-    Faceted crystal mark — the same icosahedral form as the WebGL prism,
-    with the violet/cyan/magenta dispersion across its faces.
-    Drawn procedurally; no raster source.
+    Letter mark: a geometric "C" cut from a ring, with the red accent dot
+    sitting in the aperture — the same dot used in the wordmark lockup.
+    Original geometry, drawn in code.
   -->
-  <defs>
-    <linearGradient id="cal-a" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7C5CFF"/>
-      <stop offset="100%" stop-color="#22E4E0"/>
-    </linearGradient>
-    <linearGradient id="cal-b" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FF4FD8"/>
-      <stop offset="100%" stop-color="#7C5CFF"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Facets -->
-  <polygon points="16,2 28,9 22,17" fill="url(#cal-a)" opacity="0.9"/>
-  <polygon points="16,2 22,17 10,17" fill="url(#cal-b)" opacity="0.75"/>
-  <polygon points="16,2 10,17 4,9" fill="url(#cal-a)" opacity="0.55"/>
-  <polygon points="4,9 10,17 7,25" fill="url(#cal-b)" opacity="0.5"/>
-  <polygon points="28,9 22,17 25,25" fill="url(#cal-a)" opacity="0.6"/>
-  <polygon points="10,17 22,17 16,30" fill="url(#cal-b)" opacity="0.85"/>
-
-  <!-- Edges -->
-  <g stroke="#B9AEFF" stroke-width="0.7" stroke-opacity="0.75" stroke-linejoin="round" fill="none">
-    <polygon points="16,2 28,9 25,25 16,30 7,25 4,9"/>
-    <path d="M16 2 16 30M4 9 22 17M28 9 10 17M10 17 22 17"/>
-  </g>
+  <path
+    d="M32 6a26 26 0 1 0 0 52 26 26 0 0 0 22.5-13"
+    stroke="#F5F5F6"
+    stroke-width="9"
+    stroke-linecap="butt"
+  />
+  <circle cx="49" cy="21" r="6.5" fill="#E8262E"/>
 </svg>

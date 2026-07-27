@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { footer, brand } from "@/lib/content";
+import Wordmark from "@/components/ui/Wordmark";
 
 export default function Footer() {
   return (
@@ -9,19 +9,8 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           {/* Brand */}
           <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/logo.svg"
-                alt=""
-                aria-hidden="true"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
-              <span className="text-base tracking-tight">
-                <span className="font-semibold text-ink">{brand.short}</span>{" "}
-                <span className="font-light text-muted">International</span>
-              </span>
+            <Link href="/" aria-label={`${brand.name} — home`}>
+              <Wordmark size="sm" />
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-muted">
               {footer.tagline}
@@ -30,7 +19,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`tel:${brand.phone.replace(/\s/g, "")}`}
-                  className="font-mono text-sm text-muted transition-colors hover:text-pulse"
+                  className="font-display text-sm text-muted transition-colors hover:text-pulse"
                 >
                   {brand.phone}
                 </a>
@@ -38,7 +27,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`mailto:${brand.email}`}
-                  className="font-mono text-sm break-all text-muted transition-colors hover:text-pulse"
+                  className="font-display text-sm break-all text-muted transition-colors hover:text-pulse"
                 >
                   {brand.email}
                 </a>
@@ -69,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 border-t border-line pt-8">
-          <p className="font-mono text-xs text-muted">{footer.copyright}</p>
+          <p className="font-display text-xs text-muted">{footer.copyright}</p>
         </div>
       </div>
     </footer>

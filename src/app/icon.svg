@@ -1,20 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <defs>
-    <linearGradient id="ic-a" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7C5CFF"/>
-      <stop offset="100%" stop-color="#22E4E0"/>
-    </linearGradient>
-    <linearGradient id="ic-b" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FF4FD8"/>
-      <stop offset="100%" stop-color="#7C5CFF"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="#04050A"/>
-  <polygon points="16,5 25,10 20,17" fill="url(#ic-a)"/>
-  <polygon points="16,5 20,17 12,17" fill="url(#ic-b)"/>
-  <polygon points="16,5 12,17 7,10" fill="url(#ic-a)" opacity="0.65"/>
-  <polygon points="12,17 20,17 16,27" fill="url(#ic-b)"/>
-  <g stroke="#B9AEFF" stroke-width="0.8" stroke-opacity="0.8" fill="none" stroke-linejoin="round">
-    <polygon points="16,5 25,10 23,22 16,27 9,22 7,10"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#020202"/>
+  <path
+    d="M33 14a18 18 0 1 0 0 36 18 18 0 0 0 15.6-9"
+    stroke="#F5F5F6"
+    stroke-width="7"
+    stroke-linecap="butt"
+  />
+  <circle cx="45" cy="24" r="5" fill="#E8262E"/>
 </svg>

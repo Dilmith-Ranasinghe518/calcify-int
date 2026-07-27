@@ -1,30 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, Sora, JetBrains_Mono } from "next/font/google";
+import { Onest } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/sections/Footer";
-import PrismBackground from "@/components/canvas/PrismBackground";
 import { brand } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
-const sora = Sora({
-  variable: "--font-sora",
+// Onest carries display and body. One variable family instead of three
+// static ones: fewer requests, and it is the same typeface the reference
+// site uses, free under the OFL via Google Fonts.
+const onest = Onest({
+  variable: "--font-onest",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -67,7 +55,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} h-full`}
+      className={`${onest.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-void text-ink font-sans">
         {/*
@@ -96,8 +84,14 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        {/* Persistent refractive crystal behind every route. */}
-        <PrismBackground />
+        {/*
+          Static atmosphere: a fine grid and a low red wash. CSS only — no
+          WebGL, no canvas, nothing to initialise before first paint.
+        */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-0 bg-atmosphere"
+        />
         <Nav />
         <main id="main" className="relative z-10 flex-1">
           {children}

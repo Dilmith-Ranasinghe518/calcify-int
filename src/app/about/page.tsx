@@ -117,7 +117,7 @@ export default function AboutPage() {
                 key={stat.label}
                 className="bg-panel/55 px-6 py-10 text-center backdrop-blur-[10px]"
               >
-                <dd className="font-mono text-4xl font-medium tracking-tight text-ink">
+                <dd className="font-display text-4xl font-medium tracking-tight text-ink">
                   <CountUp value={stat.value} suffix={stat.suffix} />
                 </dd>
                 <dt className="mt-3 text-sm text-muted">{stat.label}</dt>
@@ -161,7 +161,7 @@ export default function AboutPage() {
         <ul className="grid gap-px bg-line/50 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value, i) => (
             <li key={value.title} className="bg-panel/55 p-8 backdrop-blur-[10px]">
-              <p className="font-mono text-sm text-signal">
+              <p className="font-display text-sm text-signal">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-5 font-display text-base font-semibold tracking-tight text-ink">
@@ -183,7 +183,7 @@ export default function AboutPage() {
               key={milestone.year}
               className="bg-panel/55 p-8 backdrop-blur-[10px]"
             >
-              <p className="font-mono text-2xl font-medium tracking-tight text-signal">
+              <p className="font-display text-2xl font-medium tracking-tight text-signal">
                 {milestone.year}
               </p>
               <h3 className="mt-4 font-display text-base font-semibold tracking-tight text-ink">
@@ -207,7 +207,7 @@ export default function AboutPage() {
             >
               <span
                 aria-hidden="true"
-                className="mx-auto flex h-16 w-16 items-center justify-center rounded-card border border-line font-mono text-lg text-signal"
+                className="mx-auto flex h-16 w-16 items-center justify-center rounded-card border border-line font-display text-lg text-signal"
               >
                 {leader.key}
               </span>

@@ -90,7 +90,7 @@ export default function ContactPage() {
                 <dd>
                   <a
                     href={`tel:${brand.phone.replace(/\s/g, "")}`}
-                    className="font-mono text-sm text-ink transition-colors hover:text-pulse"
+                    className="font-display text-sm text-ink transition-colors hover:text-pulse"
                   >
                     {brand.phone}
                   </a>
@@ -101,7 +101,7 @@ export default function ContactPage() {
                 <dd>
                   <a
                     href={`mailto:${brand.email}`}
-                    className="font-mono text-sm break-all text-ink transition-colors hover:text-pulse"
+                    className="font-display text-sm break-all text-ink transition-colors hover:text-pulse"
                   >
                     {brand.email}
                   </a>

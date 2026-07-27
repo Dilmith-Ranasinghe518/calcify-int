@@ -128,6 +128,14 @@ export type CaseStudy = {
   body: string;
   metric: string;
   metricLabel: string;
+  /**
+   * Optional visual, served from /public/work/.
+   * Left undefined until the real asset exists — the card renders a styled
+   * placeholder rather than a broken image. See ASSET_PROMPTS.md for the
+   * generation prompts and exact filenames.
+   */
+  media?: string;
+  mediaAlt?: string;
   /** Figures and client identity not yet cleared for publication. */
   needsVerification: true;
 };

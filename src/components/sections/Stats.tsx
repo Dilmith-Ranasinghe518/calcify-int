@@ -14,7 +14,7 @@ export default function Stats() {
               key={stat.label}
               className="bg-panel/55 px-6 py-10 text-center backdrop-blur-[10px] sm:py-12"
             >
-              <dd className="font-mono text-4xl font-medium tracking-tight text-ink sm:text-5xl">
+              <dd className="font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">
                 <CountUp
                   value={stat.value}
                   suffix={stat.suffix}

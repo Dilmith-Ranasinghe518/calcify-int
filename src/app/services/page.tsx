@@ -85,7 +85,7 @@ export default function ServicesPage() {
         <ol className="grid gap-px bg-line/50 sm:grid-cols-2 lg:grid-cols-4">
           {process.map((item) => (
             <li key={item.step} className="bg-panel/55 p-8 backdrop-blur-[10px]">
-              <p className="font-mono text-3xl font-medium tracking-tight text-signal">
+              <p className="font-display text-3xl font-medium tracking-tight text-signal">
                 {item.step}
               </p>
               <h3 className="mt-5 font-display text-base font-semibold tracking-tight text-ink">

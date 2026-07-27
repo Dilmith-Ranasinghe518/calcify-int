@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { nav, brand } from "@/lib/content";
 import Button from "./Button";
+import Wordmark from "./Wordmark";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,20 +47,8 @@ export default function Nav() {
         aria-label="Main"
         className="mx-auto flex w-full max-w-[var(--container-max)] items-center justify-between px-6"
       >
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo.svg"
-            alt=""
-            aria-hidden="true"
-            width={36}
-            height={36}
-            priority
-            className="h-9 w-9"
-          />
-          <span className="text-lg tracking-tight">
-            <span className="font-semibold text-ink">{brand.short}</span>{" "}
-            <span className="font-light text-muted">International</span>
-          </span>
+        <Link href="/" aria-label={`${brand.name} — home`}>
+          <Wordmark />
         </Link>
 
         {/* Desktop */}
@@ -70,7 +58,7 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-muted transition-colors hover:text-ink"
+                  className="text-xs font-medium uppercase tracking-[0.16em] text-ink/80 transition-colors hover:text-ink"
                 >
                   {link.label}
                 </Link>
