@@ -1,23 +1,23 @@
-import HeroSection from "@/components/HeroSection";
-import TrustedBrands from "@/components/TrustedBrands";
-import StatsBar from "@/components/StatsBar";
-import ServicesSection from "@/components/ServicesSection";
-import ProjectsShowcase from "@/components/ProjectsShowcase";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Testimonials from "@/components/Testimonials";
-import CTASection from "@/components/CTASection";
+import Hero from "@/components/sections/Hero";
+import TrustedBy from "@/components/sections/TrustedBy";
+import Stats from "@/components/sections/Stats";
+import Services from "@/components/sections/Services";
+import Work from "@/components/sections/Work";
+import WhyUs from "@/components/sections/WhyUs";
+import Testimonial from "@/components/sections/Testimonial";
+import CTA from "@/components/sections/CTA";
 
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
-      <TrustedBrands />
-      <StatsBar />
-      <ServicesSection />
-      <ProjectsShowcase />
-      <WhyChooseUs />
-      <Testimonials />
-      <CTASection />
+      <Hero />
+      <TrustedBy />
+      <Stats />
+      <Services />
+      <Work />
+      <WhyUs />
+      <Testimonial />
+      <CTA />
     </>
   );
 }
