@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Reveal from "./Reveal";
 
 type Props = {
   id?: string;
@@ -29,15 +30,22 @@ export default function Section({
     >
       <div className="mx-auto w-full max-w-[var(--container-max)]">
         {(eyebrow || title || intro) && (
-          <header className="mb-16 sm:mb-20 max-w-3xl">
-            {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
-            {title && <h2 className="display-lg text-ink">{title}</h2>}
-            {intro && (
-              <p className="mt-7 text-base sm:text-lg leading-relaxed text-muted">
-                {intro}
-              </p>
-            )}
-          </header>
+          <Reveal className="mb-16 sm:mb-20 max-w-3xl">
+            <header>
+              {eyebrow && (
+                <p className="eyebrow mb-5 flex items-center gap-3">
+                  <span className="inline-block h-px w-8 bg-signal" />
+                  {eyebrow}
+                </p>
+              )}
+              {title && <h2 className="display-lg text-ink">{title}</h2>}
+              {intro && (
+                <p className="mt-7 text-base sm:text-lg leading-relaxed text-muted">
+                  {intro}
+                </p>
+              )}
+            </header>
+          </Reveal>
         )}
         {children}
       </div>

@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import WordCycler from "@/components/ui/WordCycler";
+import OrbitStage from "@/components/canvas/OrbitStage";
 import { hero } from "@/lib/content";
 
 /** Practice areas cycled behind the headline. */
@@ -13,6 +14,10 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-signal-glow"
       />
+
+      {/* Wireframe globe, right-hand column. Hidden below lg where the copy
+          needs the full width and the WebGL cost buys nothing. */}
+      <OrbitStage className="absolute right-[-4%] top-1/2 hidden h-[64vmin] w-[64vmin] -translate-y-[72%] lg:block" />
 
       <div className="relative mx-auto flex w-full max-w-[var(--container-max)] flex-1 flex-col justify-center">
         <p className="eyebrow mb-8 flex items-center gap-3">

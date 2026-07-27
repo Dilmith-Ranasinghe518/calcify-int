@@ -1,9 +1,11 @@
 /**
- * Letter-based wordmark: CALCIFY over INTERNATIONAL, with a single red
- * accent dot. Set in Onest rather than drawn as paths, so it stays crisp at
- * every size, scales with the type system, and needs no image request.
+ * Logo lockup: "C" monogram + CALCIFY over INTERNATIONAL.
  *
- * Our own lettering and lockup — not derived from any other company's mark.
+ * The mark is inline SVG and the lettering is live text set in Onest, so the
+ * whole logo is one DOM node group — sharp at every size, recolourable by
+ * CSS, and costing zero network requests.
+ *
+ * Our own geometry and lettering. Not derived from any other company's mark.
  */
 export default function Wordmark({
   className = "",
@@ -12,33 +14,41 @@ export default function Wordmark({
   className?: string;
   size?: "sm" | "md";
 }) {
-  const name =
-    size === "md"
-      ? "text-lg sm:text-xl"
-      : "text-base";
+  const markSize = size === "md" ? "h-9 w-9" : "h-8 w-8";
+  const name = size === "md" ? "text-xl sm:text-2xl" : "text-lg";
   const sub =
     size === "md"
-      ? "text-[0.58rem] tracking-[0.42em]"
-      : "text-[0.52rem] tracking-[0.38em]";
+      ? "text-[0.7rem] tracking-[0.3em]"
+      : "text-[0.64rem] tracking-[0.28em]";
 
   return (
-    <span className={`inline-flex flex-col leading-none ${className}`}>
-      <span className="flex items-baseline gap-1">
-        {/* Accent dot — the one place red appears in the mark */}
-        <span
-          aria-hidden="true"
-          className="mb-[0.15em] h-1.5 w-1.5 shrink-0 self-end rounded-full bg-signal"
+    <span className={`inline-flex items-center gap-3 ${className}`}>
+      <svg
+        viewBox="0 0 64 64"
+        aria-hidden="true"
+        focusable="false"
+        className={`${markSize} shrink-0`}
+      >
+        {/* Open "C" ring */}
+        <path
+          d="M33 12a20 20 0 1 0 0 40 20 20 0 0 0 17.3-10"
+          fill="none"
+          stroke="#F5F5F6"
+          strokeWidth="7"
         />
+        {/* Red node in the aperture — the single accent */}
+        <circle cx="47" cy="22" r="6" fill="#E8262E" />
+      </svg>
+
+      <span className="inline-flex flex-col leading-none">
         <span
           className={`${name} font-extrabold uppercase tracking-[-0.01em] text-ink`}
         >
           Calcify
         </span>
-      </span>
-      <span
-        className={`${sub} mt-1.5 pl-[0.6rem] font-medium uppercase text-muted`}
-      >
-        International
+        <span className={`${sub} mt-1.5 font-medium uppercase text-ink/65`}>
+          International
+        </span>
       </span>
     </span>
   );
