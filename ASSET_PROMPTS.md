@@ -1,128 +1,250 @@
 # Asset generation prompts — Grok Imagine
 
-Prompts for the imagery this site expects. Generate them, drop the files in the
-paths listed, then set the matching `media` field in `src/lib/content.ts`.
+Detailed prompts for the four case-study visuals the site needs, plus optional
+extras. Generate, compress, drop into the listed path, then set the matching
+`media` field in `src/lib/content.ts`.
+
 Until a file exists the card renders a styled "visual pending" placeholder, so
-you can add them one at a time without breaking the build.
-
-## House style — apply to every prompt
-
-Paste this into each generation so the set looks like one system:
-
-> Pure black background (#020202), high contrast, single red accent (#E8262E),
-> cool desaturated greys, cinematic low-key lighting, sharp modern minimalism,
-> no text, no logos, no watermarks, no people's faces, photoreal, 16:9.
-
-Keep it **dark**. Every image sits on a black page with white type over the
-lower third, so bright or busy visuals will fight the layout. Aim for detail in
-the upper two-thirds and near-black at the bottom.
+you can add these one at a time without breaking anything.
 
 ---
 
-## 1. Global Banking Platform — flagship
+## Before you start — read this once
+
+**The three constraints that decide whether an image works here:**
+
+1. **The bottom third must be near-black.** White text sits over it. If the
+   composition puts its subject low in the frame, the card is unusable no
+   matter how good the image is. Always ask for the subject in the upper two
+   thirds and darkness falling away below.
+2. **Exactly one colour of light: red `#E8262E`.** No blue, cyan, teal, orange
+   or green accents. Blue is the default "tech render" colour that every model
+   reaches for, so you have to actively push it away — that's why every prompt
+   below explicitly forbids it.
+3. **No text, no logos, no faces.** Generators love inserting fake UI labels
+   and garbled signage. Those instantly look cheap and, if a mark resembles a
+   real company's, become a legal problem.
+
+**How to work:** generate 4–6 variations per slot, then pick. Judge them
+*small and in place*, not full-screen — a busy image that looks impressive at
+100% turns to noise at card size.
+
+**Negative list — append to every prompt:**
+
+> No text, no words, no letters, no numbers, no logos, no watermarks, no
+> signatures, no UI labels, no human faces, no blue lighting, no cyan, no
+> teal, no orange, no green, not cluttered, not busy, no lens flare spam,
+> no oversaturation.
+
+---
+
+## 1. Global Banking Platform — flagship card
 
 - **File:** `public/work/global-banking.jpg`
-- **Ratio:** 4:3 (flagship card) — generate 1600×1200 or larger
-- **Field in content.ts:** `work[0].media`
+- **Ratio:** 4:3, at least 1600×1200 (this is the largest card — don't
+  under-resolve it)
+- **Field:** `work[0].media`
 
-> Abstract enterprise banking infrastructure, dark data centre corridor with
-> glowing red server indicator lights receding into blackness, subtle floating
-> holographic financial grid overlays, cool grey metal surfaces, one red accent
-> light, cinematic depth of field, low-key, photoreal, no text, no logos.
+**Prompt:**
+
+> Ultra-wide symmetrical corridor inside a modern enterprise data centre,
+> receding into deep blackness at the vanishing point. Tall matte-black server
+> racks line both sides in strict repetition, each rack punctuated by tiny
+> crimson red status LEDs (#E8262E) forming vertical rhythms of light. Cold
+> dark grey brushed-metal surfaces, subtle reflections on a polished dark
+> floor. Single-point perspective, camera at chest height, dead centre.
+> Volumetric haze catching faint red light in the upper half. Lighting is
+> low-key and dramatic: 95% of the frame is near-black, illumination comes
+> only from the equipment itself. Shot on 35mm, f/2.8, shallow depth of field
+> with the far end of the corridor soft. Cinematic, restrained, architectural,
+> photorealistic, high detail in shadow, deep blacks, no crushed highlights.
+> The bottom third of the frame falls into near-total darkness.
+
+**Why this composition:** the one-point perspective gives the flagship card a
+strong focal centre that survives being cropped, and the receding corridor
+naturally darkens toward the bottom where the headline sits.
+
+**Variations worth trying:** swap "corridor" for "server hall seen from a
+raised walkway"; or "close-up of a single rack, extreme shallow focus, red
+LEDs as bokeh".
+
+**Reject if:** you see blue equipment glow, readable text on the racks, a
+person in frame, or the floor is bright.
 
 ---
 
 ## 2. AI-Powered Healthcare
 
 - **File:** `public/work/ai-healthcare.jpg`
-- **Ratio:** 16:10 — generate 1600×1000 or larger
+- **Ratio:** 16:10, at least 1600×1000
 - **Field:** `work[1].media`
 
-> Abstract medical AI imaging, dark clinical environment, translucent
-> greyscale anatomical scan slices floating in black space, thin red scanning
-> line crossing the volume, cold clinical lighting, minimal, photoreal,
-> no text, no logos, no recognisable faces.
+**Prompt:**
+
+> Abstract medical imaging visualisation floating in a pitch-black void. A
+> translucent greyscale cross-section of a human ribcage and lungs, rendered
+> as stacked semi-transparent scan slices separated in space, like an exploded
+> CT volume. Cool neutral grey and bone-white tones only. A single thin
+> crimson red (#E8262E) horizontal scanning plane cuts through the volume,
+> casting a faint red edge glow where it intersects the tissue. Clinical,
+> precise, scientific. Centred composition, subject occupying the upper two
+> thirds, dissolving into pure black at the bottom. Soft rim lighting, no
+> harsh speculars. Volumetric depth, fine particulate detail. Photorealistic
+> medical visualisation, museum-quality render, extremely dark background.
+
+**Why this composition:** anatomy reads instantly as healthcare without
+needing a hospital, a patient, or anything that could imply a real client.
+
+**Variations worth trying:** a brain volume instead of a ribcage; or an
+abstract point-cloud of a skeletal structure.
+
+**Reject if:** it looks gory or wet, shows a recognisable face, includes fake
+readouts or vital-sign text, or the red reads as blood rather than as light.
 
 ---
 
 ## 3. Smart City Infrastructure
 
 - **File:** `public/work/smart-city.jpg`
-- **Ratio:** 16:10
+- **Ratio:** 16:10, at least 1600×1000
 - **Field:** `work[2].media`
 
-> Aerial night view of a dense city grid, near-black, thin red traffic light
-> trails threading the streets, faint sensor nodes glowing at intersections,
-> cold blue-grey buildings, long exposure, cinematic, top-down, photoreal,
-> no text, no logos.
+**Prompt:**
+
+> Aerial top-down night photograph of a dense city grid from roughly 800
+> metres, shot straight down. Buildings are near-black silhouettes with only
+> faint cool grey edge definition — almost no window light. The street grid is
+> traced by long-exposure crimson red (#E8262E) vehicle light trails flowing
+> through the arteries, brighter at major intersections where they pool into
+> small nodes of light. The overall impression is a circuit board made of
+> streets. 90% of the frame is black; the red trails are the only significant
+> light source. Long exposure, 30 seconds, sharp, high altitude, orthographic
+> feel, no perspective distortion. Cinematic aerial photography,
+> photorealistic, deep blacks, fine detail, cool desaturated shadows.
+
+**Why this composition:** top-down reads as "infrastructure" and "systems"
+rather than "travel photo", and it keeps the light distributed evenly instead
+of pooling in one bright corner.
+
+**Variations worth trying:** a motorway interchange filling the frame; or a
+port terminal with container rows in strict grid.
+
+**Reject if:** trails are white or amber (the default for car headlights — you
+must push red), buildings are lit up, or it looks like a daytime shot darkened.
 
 ---
 
 ## 4. E-Commerce Ecosystem
 
 - **File:** `public/work/ecommerce.jpg`
-- **Ratio:** 16:10
+- **Ratio:** 16:10, at least 1600×1000
 - **Field:** `work[3].media`
 
-> Abstract omnichannel retail logistics, dark automated warehouse, robotic
-> sorting arms and conveyor lines lit by red indicator strips, deep shadow,
-> cold grey steel, geometric repetition receding into black, cinematic wide
-> shot, photoreal, no text, no logos.
+**Prompt:**
+
+> Interior of a vast automated fulfilment warehouse at night, lights mostly
+> off. Endless rows of matte-black storage racking recede into darkness in
+> strong linear perspective. Robotic sorting units and conveyor lines run
+> through the frame, their edges marked by thin crimson red (#E8262E)
+> indicator strips and status lights. Cold dark grey powder-coated steel,
+> polished concrete floor with faint reflections. Geometric repetition,
+> industrial precision, completely deserted. Wide-angle shot from a low
+> vantage, subject in the upper two thirds, foreground floor falling into
+> black. Low-key cinematic lighting, volumetric haze, photorealistic,
+> architectural photography, deep shadow detail, no bright areas.
+
+**Why this composition:** logistics infrastructure communicates commerce at
+scale far better than shopfronts or products, and stays abstract enough not to
+imply a specific client.
+
+**Variations worth trying:** a close-up of a single robotic arm with red
+indicators, extreme shallow focus; or conveyor lines from directly overhead.
+
+**Reject if:** it shows branded packaging, readable barcodes or labels,
+workers, or bright overhead lighting.
 
 ---
 
-## 5. Optional — hero ambient video
-
-Only add this if you want motion behind the headline. It must stay **very**
-dark and near-static, or it will compete with the hero type and hurt LCP.
-
-- **File:** `public/hero/ambient.mp4` (plus `ambient.webm` if Grok can export it)
-- **Length:** 8–12s, seamless loop, no audio
-- **Target size:** under 3 MB — compress before committing
-
-> Extremely slow drifting abstract dark texture, black background, faint red
-> volumetric haze moving slowly from upper right, subtle floating dust motes,
-> almost static, no camera shake, no subjects, no text, seamless loop,
-> cinematic, very low brightness.
-
-**If you add this, tell me** — it needs `poster`, `muted`, `playsInline`,
-`preload="none"`, and a `prefers-reduced-motion` guard, plus it should not load
-at all on mobile. I'll wire that; don't just drop a `<video>` in.
-
----
-
-## 6. Optional — About page team/office
+## 5. Optional — About page studio shot
 
 - **File:** `public/about/studio.jpg`
 - **Ratio:** 16:9
+- **Field:** wire manually into `/about`
 
-> Dark modern software studio interior at night, empty, rows of monitors
-> glowing faintly, red accent lighting strip along one wall, cold grey
-> concrete and glass, moody, architectural photography, wide angle, photoreal,
-> no people, no text, no logos.
+**Prompt:**
+
+> Interior of a modern software engineering studio at night, completely empty.
+> Long desks with rows of dark monitors, screens off or showing only faint grey
+> glow. Exposed concrete, dark steel, floor-to-ceiling glass reflecting the
+> dark room. A single crimson red (#E8262E) LED strip runs along one wall at
+> desk height, the only colour in the frame. Cold, quiet, precise. Wide-angle
+> architectural interior photography, one-point perspective, tripod, long
+> exposure, low-key, photorealistic, deep blacks, no people, no text on screens.
+
+---
+
+## 6. Optional — hero ambient video
+
+Only if you want motion behind the headline. **Read the caution below first.**
+
+- **File:** `public/hero/ambient.mp4`
+- **Length:** 8–12s, seamless loop, silent
+- **Hard limit:** under 3 MB after compression
+
+**Prompt:**
+
+> Extremely slow-moving abstract dark atmosphere. Pure black background with
+> faint crimson red volumetric haze drifting almost imperceptibly from the
+> upper right toward centre frame. Sparse slow-floating dust particles
+> catching minimal light. Near-static, no discernible subject, no camera
+> movement, no shake, no zoom. Continuous seamless loop with no visible cut.
+> Cinematic, very low brightness, film grain, moody.
+
+**Caution:** this is the single easiest way to wreck the performance budget.
+It must not autoplay on mobile, needs a poster frame, `preload="none"`,
+`muted`, `playsInline`, and a `prefers-reduced-motion` guard. **Tell me if you
+generate it and I'll wire it properly — don't drop a raw `<video>` in.**
+
+---
+
+## 7. Optional — portfolio hover clips
+
+Short silent loops that play when a case-study card is hovered, desktop only.
+
+- **Files:** `public/work/<slug>-loop.mp4`
+- **Length:** 5–8s, seamless, silent, **under 2 MB each**
+
+Use the same prompt as the matching still image, with this appended:
+
+> Very slow subtle camera push-in, almost imperceptible movement, seamless
+> loop, no cuts, no people entering frame, static composition.
+
+Tell me if you generate these and I'll wire the hover behaviour with proper
+poster frames and a mobile bypass.
 
 ---
 
 ## After generating
 
-1. **Compress before committing.** Run each through Squoosh or similar and
-   target under ~300 KB per image. Prefer `.webp` over `.jpg` if Grok exports
-   it — `next/image` will still serve modern formats either way.
-2. **Set the field** in `src/lib/content.ts`, e.g.
+1. **Compress.** Run through [Squoosh](https://squoosh.app). Target under
+   ~300 KB per image. Export WebP if offered.
+2. **Set the field** in `src/lib/content.ts`:
 
    ```ts
    media: "/work/global-banking.jpg",
-   mediaAlt: "Dark data centre corridor with red indicator lights",
+   mediaAlt: "Dark data centre corridor lined with red server status lights",
    ```
 
-3. **Write real `mediaAlt` text.** It is read aloud by screen readers and used
-   by search engines — describe what the image shows, not the project name.
-4. Re-run `npm run build` to confirm nothing 404s.
+3. **Write real alt text.** It is read aloud by screen readers and indexed by
+   search engines. Describe what the image *shows* — not the project name,
+   which is already in the heading right beside it.
+4. Run `npm run build` and confirm no 404s.
 
-## One caution
+## One thing to keep straight
 
-These are illustrative, atmospheric images — they are not photographs of the
-actual client systems. That is normal and fine for a consultancy site. It only
-becomes a problem if a visual implies something untrue, such as showing a real
-hospital or a named client's premises. Keep them abstract, and do not caption
-them in a way that suggests they are photographs of delivered work.
+These are atmospheric, illustrative images — not photographs of the actual
+delivered systems. That is completely normal for a consultancy site. It only
+becomes a problem if a visual implies something untrue: a real hospital, a
+named client's premises, or a screenshot presented as their live product. Keep
+them abstract, and never caption them in a way that suggests they document
+real work.

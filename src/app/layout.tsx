@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
+import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/sections/Footer";
 import { brand } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
@@ -81,6 +82,8 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* Overlay, not a gate — the page renders beneath it regardless. */}
+        <Preloader />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

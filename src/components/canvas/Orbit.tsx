@@ -25,14 +25,6 @@ function Globe({ detail }: { detail: number }) {
     []
   );
 
-  // Vertex positions of the sphere, reused as glowing nodes.
-  const nodes = useMemo(() => {
-    const geo = new THREE.IcosahedronGeometry(2.6, detail);
-    const pos = geo.attributes.position.array as Float32Array;
-    geo.dispose();
-    return new Float32Array(pos);
-  }, [detail]);
-
   useFrame(({ clock, pointer }, delta) => {
     const g = group.current;
     if (!g || reduced) return;
@@ -55,41 +47,31 @@ function Globe({ detail }: { detail: number }) {
         <meshBasicMaterial color="#020202" />
       </mesh>
 
-      {/* Wireframe shell */}
+      {/*
+        Lat/long wireframe rather than an icosahedron: a subdivided icosphere
+        wireframes into scattered triangles that read as spiky noise, whereas
+        sphereGeometry's segments give the clean meridian/parallel grid that
+        actually looks like a globe.
+      */}
       <mesh>
-        <icosahedronGeometry args={[2.6, detail]} />
-        <meshBasicMaterial
-          color={INK}
-          wireframe
-          transparent
-          opacity={0.34}
-        />
+        {/* Fewer segments on the mobile/low path — same silhouette, less fill. */}
+        <sphereGeometry args={[2.6, detail >= 2 ? 24 : 16, detail >= 2 ? 16 : 12]} />
+        <meshBasicMaterial color={INK} wireframe transparent opacity={0.28} />
       </mesh>
 
-      {/* Vertex nodes */}
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[nodes, 3]} />
-        </bufferGeometry>
-        <pointsMaterial
-          color={INK}
-          size={0.045}
-          transparent
-          opacity={0.85}
-          sizeAttenuation
-        />
-      </points>
-
-      {/* Red orbital ring, tilted off-axis */}
-      <mesh rotation={[Math.PI / 2.6, 0, Math.PI / 7]}>
-        <torusGeometry args={[3.5, 0.012, 8, 128]} />
+      {/*
+        Rings are tilted well away from edge-on. A torus viewed near its own
+        plane collapses into a straight line, which just looks like a stray
+        diagonal stroke across the hero.
+      */}
+      <mesh rotation={[1.25, 0.15, 0.35]}>
+        <torusGeometry args={[3.45, 0.014, 8, 160]} />
         <meshBasicMaterial color={ACCENT} />
       </mesh>
 
-      {/* Second, fainter ring the other way */}
-      <mesh rotation={[Math.PI / 1.9, Math.PI / 5, 0]}>
-        <torusGeometry args={[3.15, 0.006, 8, 128]} />
-        <meshBasicMaterial color={INK} transparent opacity={0.3} />
+      <mesh rotation={[1.05, -0.4, -0.25]}>
+        <torusGeometry args={[3.05, 0.007, 8, 160]} />
+        <meshBasicMaterial color={INK} transparent opacity={0.28} />
       </mesh>
     </group>
   );
