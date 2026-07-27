@@ -19,14 +19,12 @@ export default function PageHero({ eyebrow, title, intro, children }: Props) {
         className="pointer-events-none absolute inset-0 bg-signal-glow"
       />
       <div className="relative mx-auto w-full max-w-[var(--container-max)]">
-        <p className="eyebrow mb-6">{eyebrow}</p>
-        <h1 className="display max-w-4xl text-4xl sm:text-5xl lg:text-6xl text-ink">
-          {title}
-        </h1>
-        <p className="mt-7 max-w-2xl text-base sm:text-lg leading-relaxed text-muted">
+        <p className="eyebrow mb-8">{eyebrow}</p>
+        <h1 className="display-lg max-w-[14ch] text-ink">{title}</h1>
+        <p className="mt-9 max-w-xl text-base sm:text-lg leading-relaxed text-muted">
           {intro}
         </p>
-        {children && <div className="mt-10">{children}</div>}
+        {children && <div className="mt-12">{children}</div>}
       </div>
     </section>
   );

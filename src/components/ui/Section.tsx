@@ -29,15 +29,11 @@ export default function Section({
     >
       <div className="mx-auto w-full max-w-[var(--container-max)]">
         {(eyebrow || title || intro) && (
-          <header className="mb-12 sm:mb-16 max-w-3xl">
-            {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
-            {title && (
-              <h2 className="display text-3xl sm:text-4xl lg:text-5xl text-ink">
-                {title}
-              </h2>
-            )}
+          <header className="mb-16 sm:mb-20 max-w-3xl">
+            {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
+            {title && <h2 className="display-lg text-ink">{title}</h2>}
             {intro && (
-              <p className="mt-5 text-base sm:text-lg leading-relaxed text-muted">
+              <p className="mt-7 text-base sm:text-lg leading-relaxed text-muted">
                 {intro}
               </p>
             )}

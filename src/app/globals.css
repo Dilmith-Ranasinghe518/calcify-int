@@ -6,19 +6,21 @@
    Each entry generates utilities (--color-void -> bg-void / text-void / ...).
    ========================================================================= */
 @theme {
-  /* Surfaces */
-  --color-void: #0b0d14;
-  --color-panel: #12151f;
-  --color-line: #232838;
+  /* Surfaces — deep space, darker than before so the prism reads as light */
+  --color-void: #04050a;
+  --color-panel: #0a0c16;
+  --color-line: #1b1f33;
 
   /* Text */
-  --color-ink: #edeff7;
-  --color-muted: #8a90a6;
+  --color-ink: #f4f5fc;
+  --color-muted: #8e93ae;
 
-  /* Accents */
-  --color-signal: #5b6ef5; /* primary — indigo, the Lattice's core color */
-  --color-pulse: #3fe0d0; /* secondary — cyan, hover/active states */
-  --color-cta: #ffb454; /* amber — reserved ONLY for primary CTA buttons */
+  /* Iridescent spectrum — the prism's dispersion range.
+     Names kept (signal/pulse) so existing utility classes stay valid. */
+  --color-signal: #7c5cff; /* violet — primary */
+  --color-pulse: #22e4e0; /* cyan — hover / active */
+  --color-flare: #ff4fd8; /* magenta — third dispersion band, used sparingly */
+  --color-cta: #ffb454; /* amber — complementary pop, primary CTAs only */
 
   /* Type stacks — variables are injected by next/font in layout.tsx */
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
@@ -41,6 +43,7 @@
   --text-muted: var(--color-muted);
   --accent-signal: var(--color-signal);
   --accent-pulse: var(--color-pulse);
+  --accent-flare: var(--color-flare);
   --accent-cta: var(--color-cta);
 
   /* 8px base unit. 120–160px desktop, 64–80px mobile. */
@@ -112,11 +115,32 @@ body {
 }
 
 /* ===== TYPOGRAPHY HELPERS ===== */
+/* Editorial display: oversized, tightly tracked, minimal leading. */
 .display {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  letter-spacing: -0.038em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+/* Hero-scale type — near-viewport-filling on desktop. */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  font-size: clamp(2.75rem, 8.5vw, 8.5rem);
+}
+
+/* Section-scale type. */
+.display-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-size: clamp(2.25rem, 5.5vw, 4.75rem);
+  text-wrap: balance;
 }
 
 /* Eyebrow / data label — mono, per spec used only for labels and readouts */
@@ -160,12 +184,19 @@ body {
   opacity: 0.35;
 }
 
+/* Iridescent wash — violet through magenta, the prism's dispersion range. */
 .bg-signal-glow {
-  background: radial-gradient(
-    ellipse 60% 50% at 50% 0%,
-    color-mix(in srgb, var(--color-signal) 14%, transparent) 0%,
-    transparent 100%
-  );
+  background:
+    radial-gradient(
+      ellipse 50% 45% at 20% 0%,
+      color-mix(in srgb, var(--color-signal) 22%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 80% 10%,
+      color-mix(in srgb, var(--color-flare) 14%, transparent) 0%,
+      transparent 70%
+    );
 }
 
 /* ===== MARQUEE (Trusted by) ===== */

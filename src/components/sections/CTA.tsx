@@ -15,9 +15,7 @@ export default function CTA() {
       />
 
       <div className="relative mx-auto w-full max-w-3xl text-center">
-        <h2 className="display text-3xl sm:text-4xl lg:text-5xl text-ink">
-          {cta.h2}
-        </h2>
+        <h2 className="display-lg text-ink">{cta.h2}</h2>
         <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted">
           {cta.body}
         </p>

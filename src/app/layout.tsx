@@ -3,7 +3,7 @@ import { Inter, Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
 import Footer from "@/components/sections/Footer";
-import LatticeBackground from "@/components/canvas/LatticeBackground";
+import PrismBackground from "@/components/canvas/PrismBackground";
 import { brand } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
@@ -96,8 +96,8 @@ export default function RootLayout({
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        {/* Persistent Lattice behind every route — Section 1. */}
-        <LatticeBackground />
+        {/* Persistent refractive crystal behind every route. */}
+        <PrismBackground />
         <Nav />
         <main id="main" className="relative z-10 flex-1">
           {children}

@@ -5,14 +5,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * Drives the Lattice's morph state from overall page scroll — Section 2:
+ * Drives the scene's motion from overall page scroll — Section 2:
  * "scroll-linked via ScrollTrigger, not autoplaying".
  *
  * Writes into a ref rather than React state on purpose: the value is read
  * inside useFrame every frame, and re-rendering the tree 60x a second would
  * defeat the point.
  */
-export function useLatticeScroll(): RefObject<number> {
+export function useScrollProgress(): RefObject<number> {
   const progress = useRef(0);
 
   useEffect(() => {
