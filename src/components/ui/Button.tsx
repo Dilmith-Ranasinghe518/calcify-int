@@ -69,7 +69,7 @@ export default function Button({
   );
 
   // The wrapper owns hover state so the pill and arrow react together.
-  const wrapper = "group inline-flex items-center gap-2";
+  const wrapper = "group inline-flex items-center gap-2 align-middle";
 
   if (href) {
     const isExternal = /^(https?:|mailto:|tel:)/.test(href);

@@ -36,10 +36,10 @@ export default function OpenGraphImage() {
         >
           <svg width="620" height="620" viewBox="0 0 32 32" fill="none">
             <polygon points="16,2 28,9 22,17" fill="#F5F5F6" opacity="0.55" />
-            <polygon points="16,2 22,17 10,17" fill="#E8262E" opacity="0.4" />
+            <polygon points="16,2 22,17 10,17" fill="#4D7CFF" opacity="0.4" />
             <polygon points="16,2 10,17 4,9" fill="#F5F5F6" opacity="0.3" />
-            <polygon points="4,9 10,17 7,25" fill="#E8262E" opacity="0.28" />
-            <polygon points="28,9 22,17 25,25" fill="#E8262E" opacity="0.35" />
+            <polygon points="4,9 10,17 7,25" fill="#4D7CFF" opacity="0.28" />
+            <polygon points="28,9 22,17 25,25" fill="#4D7CFF" opacity="0.35" />
             <polygon points="10,17 22,17 16,30" fill="#F5F5F6" opacity="0.45" />
             <g stroke="#F5F5F6" strokeWidth="0.28" strokeOpacity="0.7" fill="none">
               <polygon points="16,2 28,9 25,25 16,30 7,25 4,9" />
@@ -55,7 +55,7 @@ export default function OpenGraphImage() {
               width: 14,
               height: 14,
               borderRadius: 999,
-              background: "#E8262E",
+              background: "#4D7CFF",
               display: "flex",
             }}
           />

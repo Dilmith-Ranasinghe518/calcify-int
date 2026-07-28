@@ -13,13 +13,14 @@ type Props = {
  */
 export default function PageHero({ eyebrow, title, intro, children }: Props) {
   return (
-    <section className="relative overflow-hidden px-6 pt-36 pb-16 sm:pt-44 sm:pb-20">
+    <section className="studio-page-hero relative overflow-hidden px-6 pt-36 pb-16 sm:pt-44 sm:pb-20">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-signal-glow"
       />
       <div className="relative mx-auto w-full max-w-[var(--container-max)]">
-        <p className="eyebrow mb-8">{eyebrow}</p>
+        <div className="section-topline"><span>{eyebrow}</span><span>CALCIFY INTERNATIONAL / EST. 2015</span></div>
+        <p className="eyebrow studio-route-kicker mb-8">{eyebrow}</p>
         <h1 className="display-lg max-w-[14ch] text-ink">{title}</h1>
         <p className="mt-9 max-w-xl text-base sm:text-lg leading-relaxed text-muted">
           {intro}

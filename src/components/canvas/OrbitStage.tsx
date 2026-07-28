@@ -92,7 +92,7 @@ function StaticGlobe() {
         rx="56"
         ry="20"
         fill="none"
-        stroke="#E8262E"
+        stroke="#4D7CFF"
         strokeWidth="0.7"
         transform="rotate(-24)"
       />

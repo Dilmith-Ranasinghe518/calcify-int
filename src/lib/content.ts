@@ -136,6 +136,8 @@ export type CaseStudy = {
    */
   media?: string;
   mediaAlt?: string;
+  /** Code-drawn fallback visual shown until `media` is set. */
+  art: "datacenter" | "scan" | "city" | "warehouse";
   /** Figures and client identity not yet cleared for publication. */
   needsVerification: true;
 };
@@ -147,6 +149,9 @@ export const work: CaseStudy[] = [
     body: "End-to-end digital banking transformation for a leading financial institution, serving more than ten million customers across thirty countries. We modernized core banking systems while maintaining zero downtime during migration.",
     metric: "10M+",
     metricLabel: "Users",
+    media: "/work/datacenter.jpg",
+    mediaAlt: "Dark data center corridor lined with server racks glowing with red LED indicators",
+    art: "datacenter",
     needsVerification: true,
   },
   {
@@ -155,6 +160,9 @@ export const work: CaseStudy[] = [
     body: "A machine learning diagnostic platform that reduced medical imaging analysis time by eighty-five percent for a global healthcare network, helping clinicians reach diagnoses faster without compromising accuracy.",
     metric: "85%",
     metricLabel: "Faster",
+    media: "/work/scan.jpg",
+    mediaAlt: "X-ray scan of a ribcage with a red laser scanning line across the thorax",
+    art: "scan",
     needsVerification: true,
   },
   {
@@ -163,6 +171,9 @@ export const work: CaseStudy[] = [
     body: "An IoT-enabled smart city platform managing more than fifty thousand connected sensors for traffic, energy, and waste management in real time, built on a resilient multi-cloud architecture.",
     metric: "50K+",
     metricLabel: "Sensors",
+    media: "/work/city.jpg",
+    mediaAlt: "Aerial view of a city grid at night with red-glowing data streams along the streets",
+    art: "city",
     needsVerification: true,
   },
   {
@@ -171,6 +182,9 @@ export const work: CaseStudy[] = [
     body: "An omnichannel retail platform processing more than five hundred million dollars in annual transactions with a 99.99% uptime guarantee, unifying web, mobile, and in-store experiences into a single system.",
     metric: "$500M+",
     metricLabel: "Revenue",
+    media: "/work/warehouse.jpg",
+    mediaAlt: "Dark automated warehouse interior with towering racking and red accent lighting",
+    art: "warehouse",
     needsVerification: true,
   },
 ];

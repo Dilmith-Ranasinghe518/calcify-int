@@ -37,7 +37,7 @@ export default function Wordmark({
           strokeWidth="7"
         />
         {/* Red node in the aperture — the single accent */}
-        <circle cx="47" cy="22" r="6" fill="#E8262E" />
+          <circle cx="47" cy="22" r="6" fill="#4D7CFF" />
       </svg>
 
       <span className="inline-flex flex-col leading-none">

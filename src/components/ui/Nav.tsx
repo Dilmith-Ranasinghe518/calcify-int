@@ -36,16 +36,10 @@ export default function Nav() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass py-3"
-          : "bg-transparent border-b border-transparent py-5"
-      }`}
-    >
+    <header className={`studio-nav fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "studio-nav-scrolled" : ""}`}>
       <nav
         aria-label="Main"
-        className="mx-auto flex w-full max-w-[var(--container-max)] items-center justify-between px-6"
+        className="studio-nav-inner mx-auto flex w-full max-w-[var(--container-max)] items-center justify-between px-6"
       >
         <Link href="/" aria-label={`${brand.name} — home`}>
           <Wordmark />
@@ -58,14 +52,14 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-xs font-medium uppercase tracking-[0.16em] text-ink/80 transition-colors hover:text-ink"
+                  className="studio-nav-link text-xs font-medium uppercase tracking-[0.16em] text-ink/80 transition-colors hover:text-ink"
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <Button href={nav.cta.href} variant="primary">
+          <Button href={nav.cta.href} variant="primary" withArrow>
             {nav.cta.label}
           </Button>
         </div>

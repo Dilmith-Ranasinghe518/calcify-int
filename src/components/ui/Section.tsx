@@ -25,7 +25,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`relative px-6 py-[var(--section-y)] ${className}`}
+      className={`studio-section relative px-6 py-[var(--section-y)] ${className}`}
       style={{ scrollMarginTop: "6rem" }}
     >
       <div className="mx-auto w-full max-w-[var(--container-max)]">

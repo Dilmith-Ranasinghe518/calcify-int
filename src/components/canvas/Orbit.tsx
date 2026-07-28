@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 const INK = "#F5F5F6";
-const ACCENT = "#E8262E";
+const ACCENT = "#4D7CFF";
 
 /**
  * Wireframe globe with a red orbital ring.

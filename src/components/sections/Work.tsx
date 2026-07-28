@@ -23,7 +23,7 @@ export default function Work() {
           alt={flagship.mediaAlt}
           label={flagship.title}
           priority
-          className="aspect-[4/3] w-full"
+          className="aspect-video w-full"
         />
         <div>
           <p className="eyebrow flex items-center gap-3 text-signal">
@@ -53,7 +53,7 @@ export default function Work() {
               src={item.media}
               alt={item.mediaAlt}
               label={item.title}
-              className="aspect-[16/10] w-full"
+              className="aspect-video w-full"
             />
             <p className="eyebrow mt-6 text-signal">{item.category}</p>
             <h3 className="mt-3 text-xl font-bold tracking-tight text-ink">
