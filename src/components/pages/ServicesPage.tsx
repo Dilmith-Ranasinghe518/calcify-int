@@ -41,7 +41,7 @@ export default function ServicesPage() {
         }
       />
 
-      <section className={styles.block}>
+      <section className={styles.block} data-lattice="grid">
         <div className="section-topline">
           <span>02 / Capabilities</span>
           <span>Strategy · Design · Engineering</span>

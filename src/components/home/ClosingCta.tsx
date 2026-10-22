@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NetworkCanvas from "./NetworkCanvas";
 import CommandLine from "./CommandLine";
 import Magnetic from "@/components/motion/Magnetic";
 import RevealText from "@/components/motion/RevealText";
@@ -8,8 +7,7 @@ import styles from "./ClosingCta.module.css";
 
 export default function ClosingCta({ index = "06" }: { index?: string }) {
   return (
-    <section className={styles.section} id="contact">
-      <NetworkCanvas mode="converge" className={styles.canvas} />
+    <section className={styles.section} id="contact" data-lattice="converge">
       <div aria-hidden="true" className={styles.fade} />
 
       <div className={styles.inner}>

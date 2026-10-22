@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import NetworkCanvas from "./NetworkCanvas";
 import RevealText from "@/components/motion/RevealText";
 import Magnetic from "@/components/motion/Magnetic";
 import { CyclingWord } from "@/components/motion/Scramble";
@@ -35,13 +34,9 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 160]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const canvasOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.4]);
 
   return (
-    <section ref={ref} className={styles.hero}>
-      <motion.div className={styles.canvasWrap} style={{ opacity: canvasOpacity }}>
-        <NetworkCanvas className={styles.canvas} scatter={scrollYProgress} />
-      </motion.div>
+    <section ref={ref} className={styles.hero} data-lattice="drift">
       <div aria-hidden="true" className={styles.vignette} />
 
       <motion.div className={styles.inner} style={{ y, opacity }}>

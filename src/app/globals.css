@@ -111,8 +111,18 @@ body {
 
 .studio-home,
 .studio-subpage {
-  background: var(--c-bg);
   color: var(--c-ink);
+}
+
+/* The site-wide lattice (components/Lattice.tsx): fixed behind all content.
+   Sections stay transparent so it shows through everywhere. */
+.lattice {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
 }
 
 /* ===== TYPE ===== */
@@ -172,9 +182,11 @@ body {
 .reveal-line {
   display: block;
   overflow: hidden;
-  /* Room for descenders and the italic overhang inside the clip. */
-  padding: 0 0.08em 0.1em 0;
-  margin-bottom: -0.1em;
+  /* Room for descenders (g, y, p) and the italic overhang inside the clip.
+     Display headlines run at ~0.9 line-height, so descenders hang well
+     below the line box; the negative margin keeps the leading unchanged. */
+  padding: 0 0.08em 0.24em 0;
+  margin-bottom: -0.24em;
 }
 
 .reveal-line-inner {
@@ -592,7 +604,7 @@ a:focus-visible .wordmark-dot {
 .site-footer {
   position: relative;
   overflow: hidden;
-  background: var(--c-bg);
+  background: linear-gradient(180deg, rgb(8 8 10 / 0.4), rgb(8 8 10 / 0.85));
 }
 
 .footer-giant {

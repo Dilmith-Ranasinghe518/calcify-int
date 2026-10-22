@@ -45,10 +45,19 @@ phrase per headline, via `<em>`), JetBrains Mono (labels, data, code).
 - Loading: a boot-sequence loader on every full page load (shorter on repeat
   visits, hard-capped) and a wordmark curtain between pages (`src/app/template.tsx`).
 
+## The Lattice (`src/components/Lattice.tsx`)
+
+One living network fixed behind every page (mounted in the root layout, so it
+carries on across navigation): three depths with pointer and scroll parallax,
+packet trails, broadcast waves, and click-to-send pulses. Sections set its
+mood with `data-lattice` and it blends between them as you scroll:
+`drift` (heroes), `grid` (a triangular crystal lattice — build, capabilities),
+`calm` (dimmed behind long copy), `converge` (orbits around one core — contact).
+Sections are transparent so it shows through everywhere.
+
 ## Homepage chapters (`src/components/home/`)
 
-1. **Hero** — "the Lattice" (`NetworkCanvas`): a three-depth node network with
-   parallax, packet trails and broadcast waves; click to send one.
+1. **Hero** — kinetic headline over the lattice in its `drift` mood.
 2. **VelocityMarquee** — disciplines and stack, thrown along by scroll speed.
 3. **Manifesto** — scroll-lit statement plus offer facts.
 4. **BuildSequence** (`build/`) — pinned: blueprint draws → code types →

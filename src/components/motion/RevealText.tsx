@@ -43,7 +43,8 @@ export default function RevealText({
           <motion.span
             className="reveal-line-inner"
             variants={{
-              hidden: { y: "108%", rotate: 2.5 },
+              // Far enough down to clear the descender room in .reveal-line.
+              hidden: { y: "140%", rotate: 2.5 },
               shown: {
                 y: "0%",
                 rotate: 0,

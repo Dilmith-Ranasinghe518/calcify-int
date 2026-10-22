@@ -2,11 +2,10 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, type ReactNode } from "react";
-import NetworkCanvas from "@/components/home/NetworkCanvas";
 import RevealText from "@/components/motion/RevealText";
 import styles from "./pages.module.css";
 
-/** Opening screen shared by the inner pages: the lattice, a big headline, a short intro. */
+/** Opening screen shared by the inner pages: a big headline and a short intro over the lattice. */
 export default function SubHero({
   index,
   eyebrow,
@@ -29,10 +28,7 @@ export default function SubHero({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className={styles.hero}>
-      <div className={styles.heroCanvas}>
-        <NetworkCanvas scatter={scrollYProgress} className={styles.canvas} />
-      </div>
+    <section ref={ref} className={styles.hero} data-lattice="drift">
       <div aria-hidden="true" className={styles.heroFade} />
       <motion.div className={styles.heroInner} style={{ y, opacity }}>
         <div className="section-topline">

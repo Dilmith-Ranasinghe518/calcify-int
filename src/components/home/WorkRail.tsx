@@ -80,6 +80,7 @@ export default function WorkRail() {
       id="work"
       className={styles.section}
       data-static={Boolean(reduced)}
+      data-lattice="calm"
       style={reduced ? undefined : { height: `calc(100svh + ${distance}px)` }}
     >
       <div className={styles.sticky}>
