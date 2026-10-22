@@ -86,7 +86,7 @@ export default function BuildSequence() {
   const current = reduced ? N - 1 : stage;
 
   return (
-    <section ref={ref} id="build" className={styles.section} data-static={Boolean(reduced)}>
+    <section ref={ref} id="build" className={styles.section} data-static={Boolean(reduced)} data-lattice="grid">
       <div className={styles.sticky}>
         <div className="section-topline">
           <span>02 / How we build</span>

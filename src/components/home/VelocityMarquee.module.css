@@ -3,7 +3,6 @@
   padding: 3.5rem 0 3rem;
   border-block: 1px solid var(--c-line);
   overflow: hidden;
-  background: var(--c-bg);
 }
 
 .label {

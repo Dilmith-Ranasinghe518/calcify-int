@@ -20,7 +20,7 @@ const MORE = services.filter((s) => !FEATURED.some((f) => f.slug === s.slug));
 
 export default function Capabilities() {
   return (
-    <section id="services" className={styles.section}>
+    <section id="services" className={styles.section} data-lattice="grid">
       <div className="section-topline">
         <span>03 / Capabilities</span>
         <span>Strategy · Design · Engineering</span>

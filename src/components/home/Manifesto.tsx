@@ -7,7 +7,7 @@ import styles from "./Manifesto.module.css";
 
 export default function Manifesto() {
   return (
-    <section className={styles.section} id="about">
+    <section className={styles.section} id="about" data-lattice="calm">
       <div className="section-topline">
         <span>01 / Who we are</span>
         <span>People × process × product</span>

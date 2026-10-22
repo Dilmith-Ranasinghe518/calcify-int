@@ -5,7 +5,7 @@ import BackToTop from "@/components/ui/BackToTop";
 
 export default function Footer() {
   return (
-    <footer className="site-footer border-t border-line px-6 pt-16 sm:pt-20">
+    <footer className="site-footer border-t border-line px-6 pt-16 sm:pt-20" data-lattice="calm">
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_2fr]">
           {/* Brand */}

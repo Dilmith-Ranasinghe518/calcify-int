@@ -64,7 +64,7 @@ function Row({ items, speed, variant }: { items: string[]; speed: number; varian
 /** What we do, and what we do it with — thrown along by the scroll. */
 export default function VelocityMarquee() {
   return (
-    <section className={styles.section} aria-label="Disciplines and technology">
+    <section className={styles.section} aria-label="Disciplines and technology" data-lattice="drift">
       <p className={styles.label}>
         <span>What we build · what we build it with</span>
         <span>Scroll faster ↓</span>

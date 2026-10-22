@@ -8,6 +8,7 @@ import Footer from "@/components/sections/Footer";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Cursor from "@/components/motion/Cursor";
+import Lattice from "@/components/Lattice";
 import { brand } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
@@ -105,6 +106,8 @@ export default function RootLayout({
         <SmoothScroll />
         <ScrollProgress />
         <Cursor />
+        {/* The living network behind every page — persists across navigation. */}
+        <Lattice />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

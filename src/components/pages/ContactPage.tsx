@@ -56,7 +56,7 @@ export default function ContactPage() {
         intro="Tell us what you're trying to change. We'll come back with a point of view, a practical path forward and the right people to make it happen."
       />
 
-      <section className={styles.contact}>
+      <section className={styles.contact} data-lattice="calm">
         <div className={styles.contactSide}>
           <div className="section-topline">
             <span>02 / Start a conversation</span>

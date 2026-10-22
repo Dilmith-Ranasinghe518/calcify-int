@@ -55,7 +55,7 @@ export default function Process({ index = "05" }: { index?: string }) {
   });
 
   return (
-    <section className={styles.section} id="process">
+    <section className={styles.section} id="process" data-lattice="calm">
       <div className="section-topline">
         <span>{index} / Process</span>
         <span>Simple on purpose</span>

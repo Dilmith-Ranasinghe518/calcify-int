@@ -38,7 +38,7 @@ export default function AboutPage() {
         intro="Calcify is a software studio for ambitious companies. Strategy, design and engineering under one roof — so the next version of your business actually gets built."
       />
 
-      <section className={styles.statement}>
+      <section className={styles.statement} data-lattice="calm">
         <div className="section-topline">
           <span>02 / The short version</span>
           <span>Why we exist</span>
@@ -49,7 +49,7 @@ export default function AboutPage() {
         />
       </section>
 
-      <section className={styles.block} id="how">
+      <section className={styles.block} id="how" data-lattice="grid">
         <div className="section-topline">
           <span>03 / How we work</span>
           <span>People × process × product</span>
@@ -73,7 +73,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className={styles.block}>
+      <section className={styles.block} data-lattice="calm">
         <div className="section-topline">
           <span>04 / What you get</span>
           <span>On every engagement</span>
