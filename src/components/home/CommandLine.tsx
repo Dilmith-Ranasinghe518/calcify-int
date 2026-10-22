@@ -103,7 +103,8 @@ export default function CommandLine() {
       <div ref={outRef} className={styles.shellOut} aria-live="polite" data-lenis-prevent>
         {lines.map((l) => (
           <div key={l.id} className={styles[l.kind]}>
-            {l.kind === "in" && <span className={styles.prompt}>visitor@calcify ~ %</span>} {l.content}
+            {l.kind === "in" && <span className={styles.prompt}>visitor@calcify ~ % </span>}
+            {l.content}
           </div>
         ))}
         <form onSubmit={submit} className={styles.shellForm}>

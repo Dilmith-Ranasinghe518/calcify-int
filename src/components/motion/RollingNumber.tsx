@@ -1,7 +1,8 @@
 "use client";
 
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const DIGITS = "0123456789";
 

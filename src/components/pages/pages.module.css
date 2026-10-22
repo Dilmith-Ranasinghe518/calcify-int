@@ -248,6 +248,8 @@
 .serviceVisual {
   display: grid;
   place-items: center;
+  min-width: 0;
+  overflow: hidden;
   min-height: 220px;
   border-radius: 14px;
   background:
@@ -463,7 +465,7 @@
     font-size: clamp(2.9rem, 14vw, 6rem);
   }
   .heroBottom {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.75rem;
   }
   .jump {
@@ -474,7 +476,7 @@
     padding: 6rem 1.25rem;
   }
   .cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .facts {
     grid-template-columns: repeat(2, 1fr);
@@ -489,12 +491,12 @@
     border-top: 1px solid var(--c-line);
   }
   .service {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.75rem;
     padding: 1.5rem;
   }
   .contact {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 4rem;
     padding: 5rem 1.25rem 6rem;
   }
@@ -502,6 +504,6 @@
     padding: 1.5rem;
   }
   .row2 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

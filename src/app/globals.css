@@ -454,6 +454,8 @@ body {
 
 .preloader[data-leaving="true"] {
   clip-path: inset(0 0 100% 0);
+  /* Taps go straight through to the page while the curtain wipes away. */
+  pointer-events: none;
 }
 
 .preloader-word {
@@ -611,11 +613,14 @@ a:focus-visible .wordmark-dot {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  margin: 3rem -2vw -0.18em;
+  /* Whole word visible (the y's tail included); it fades out toward the
+     bottom edge instead of being cut off by it. */
+  margin: 3rem -2vw 0;
+  padding-bottom: 0.06em;
   font-size: clamp(5rem, 25vw, 26rem);
   font-weight: 600;
   letter-spacing: -0.075em;
-  line-height: 0.8;
+  line-height: 0.95;
   color: transparent;
   background: linear-gradient(180deg, rgb(var(--ink-rgb) / 0.16), rgb(var(--ink-rgb) / 0) 85%);
   -webkit-background-clip: text;
@@ -769,6 +774,26 @@ a:focus-visible .wordmark-dot {
   gap: 1.25rem;
   font: 400 0.8rem/1 var(--font-mono);
   color: var(--c-muted);
+}
+
+/* ===== TOUCH TARGETS =====
+   Inline links in the footer and contact details are small text; on touch
+   screens give them a taller hit area without changing the layout much. */
+@media (pointer: coarse) {
+  .text-link {
+    min-height: 44px;
+  }
+  .site-footer a,
+  .site-footer button,
+  [data-touch-pad] a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+  .site-footer ul.space-y-2 > li + li,
+  .site-footer ul.space-y-3 > li + li {
+    margin-top: 0;
+  }
 }
 
 /* ===== REDUCED MOTION ===== */

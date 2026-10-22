@@ -379,6 +379,7 @@
 
 .log li {
   padding: 4px 0;
+  white-space: nowrap;
   font: 400 11.5px/1.5 var(--font-mono);
   color: var(--c-muted);
 }
