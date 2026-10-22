@@ -1,10 +1,11 @@
 /**
- * Single source of truth for all site copy.
- * Mirrors DESIGN_SPEC.md Section 3 verbatim. Edit here, not in components.
+ * Single source of truth for site copy. Edit here, not in components.
  *
- * NOTE: several items below carry unverified claims (case-study figures,
- * a named testimonial, SOC 2 / ISO 27001 compliance). They are marked with
- * `needsVerification` and must be cleared before launch — see Section 10.
+ * Honesty rule: Calcify has no published clients yet, so nothing here claims
+ * a track record — no client names, delivered-project counts, user numbers or
+ * certifications. The figures in `facts` describe what we offer, and `work`
+ * describes the kinds of platform we build, labelled as concepts. When real,
+ * cleared case studies exist, they replace the concepts here.
  */
 
 export type NavLink = { label: string; href: string };
@@ -28,48 +29,14 @@ export const brand = {
   email: "support.calcifylabs@gmail.com",
 };
 
-export const hero = {
-  eyebrow: "Enterprise Digital Infrastructure · Since 2015",
-  h1: "Engineering Tomorrow's Digital Infrastructure",
-  subhead:
-    "We build transformative digital solutions for the world's most ambitious enterprises. From ERP systems to AI-powered platforms, we turn complexity into competitive advantage — combining deep technical expertise with a relentless focus on business outcomes.",
-  primary: { label: "Start a Project", href: "/contact" },
-  secondary: { label: "Explore Services", href: "/#services" },
-};
+/** Offer facts, not track record — each one is true of every engagement. */
+export type Fact = { value: string; label: string };
 
-export const trustedBy = {
-  label: "Trusted by industry leaders worldwide",
-  /**
-   * Third-party trademarks. Rendered as plain text wordmarks in a single
-   * consistent style — NOT as reproduced logo graphics — since we do not
-   * hold usage rights or official logo files for these marks.
-   */
-  marks: [
-    "Google",
-    "Microsoft",
-    "Amazon",
-    "Meta",
-    "Apple",
-    "SAP",
-    "Oracle",
-    "Salesforce",
-    "IBM",
-    "Deloitte",
-  ],
-};
-
-export type Stat = {
-  value: number;
-  suffix: string;
-  decimals?: number;
-  label: string;
-};
-
-export const stats: Stat[] = [
-  { value: 500, suffix: "+", label: "Projects Delivered" },
-  { value: 50, suffix: "+", label: "Countries Served" },
-  { value: 99.9, suffix: "%", decimals: 1, label: "Client Satisfaction" },
-  { value: 200, suffix: "+", label: "Expert Engineers" },
+export const facts: Fact[] = [
+  { value: "9", label: "Disciplines under one roof" },
+  { value: "3", label: "Clouds: AWS · Azure · GCP" },
+  { value: "14", label: "Days per sprint, demoed to you" },
+  { value: "2", label: "Mobile platforms: iOS & Android" },
 ];
 
 export type Service = { title: string; body: string; slug: string };
@@ -78,176 +45,100 @@ export const services: Service[] = [
   {
     slug: "erp",
     title: "ERP System Development",
-    body: "End-to-end enterprise resource planning solutions tailored for complex business workflows. We streamline operations, finance, HR, and supply chain management with custom-built ERP platforms designed around how your organization actually works.",
+    body: "End-to-end enterprise resource planning tailored to complex business workflows. We streamline operations, finance, HR and supply chain with custom ERP platforms designed around how your organisation actually works.",
   },
   {
     slug: "web",
     title: "Web Development",
-    body: "High-performance web applications and enterprise portals built with cutting-edge technologies. From React ecosystems to full-stack Next.js solutions, we build for scale from day one.",
+    body: "High-performance web applications and enterprise portals built with modern technology. From React front ends to full-stack Next.js platforms, we build for scale from day one.",
   },
   {
     slug: "ai",
     title: "AI Development",
-    body: "Machine learning models, computer vision, natural language processing, and generative AI solutions that transform business intelligence. We help you harness AI to automate operations and unlock new sources of insight.",
+    body: "Machine learning, computer vision, natural language processing and generative AI that do real work inside your business — automating operations and surfacing new insight.",
   },
   {
     slug: "mobile",
     title: "Mobile App Development",
-    body: "Native and cross-platform mobile applications for iOS and Android. From consumer-facing apps to enterprise mobility solutions, we build products trusted by millions of active users.",
+    body: "Native and cross-platform apps for iOS and Android. From consumer apps to enterprise mobility, designed to be fast, intuitive and used every day.",
   },
   {
     slug: "cloud",
     title: "Cloud Solutions",
-    body: "Architecting and deploying scalable cloud infrastructure on AWS, Azure, and GCP. Our cloud migration, DevOps automation, and multi-cloud strategies are built for enterprise resilience.",
+    body: "Scalable cloud architecture on AWS, Azure and GCP. Cloud migration, DevOps automation and multi-cloud strategies built for resilience.",
   },
   {
     slug: "security",
     title: "Cybersecurity",
-    body: "Comprehensive security assessments, zero-trust architecture, SOC operations, and compliance frameworks that protect critical digital assets for Fortune 500 enterprises.",
+    body: "Security assessments, zero-trust architecture, monitoring and compliance groundwork that protect critical systems and data.",
   },
   {
     slug: "transformation",
     title: "Digital Transformation",
-    body: "Strategic consulting and hands-on implementation of digital transformation roadmaps. We modernize legacy systems, automate workflows, and drive innovation at enterprise scale.",
+    body: "Strategy and hands-on delivery of transformation roadmaps. We modernise legacy systems, automate workflows and make change stick.",
   },
   {
     slug: "data",
     title: "Data Analytics",
-    body: "Real-time analytics dashboards, data warehousing, ETL pipelines, and business intelligence platforms that turn raw data into decisions that drive revenue.",
+    body: "Real-time dashboards, data warehousing, ETL pipelines and business intelligence that turn raw data into decisions.",
   },
   {
     slug: "qa",
     title: "QA Services",
-    body: "Comprehensive quality assurance and testing — automated testing, performance testing, security audits, and CI/CD quality gates that ensure flawless software delivery, every release.",
+    body: "Automated, performance and security testing with CI/CD quality gates, so every release ships with confidence.",
   },
 ];
 
-export type CaseStudy = {
+export type Concept = {
   title: string;
   category: string;
   body: string;
-  metric: string;
-  metricLabel: string;
-  /**
-   * Optional visual, served from /public/work/.
-   * Left undefined until the real asset exists — the card renders a styled
-   * placeholder rather than a broken image. See ASSET_PROMPTS.md for the
-   * generation prompts and exact filenames.
-   */
-  media?: string;
-  mediaAlt?: string;
-  /** Code-drawn fallback visual shown until `media` is set. */
-  art: "datacenter" | "scan" | "city" | "warehouse";
-  /** Figures and client identity not yet cleared for publication. */
-  needsVerification: true;
+  stack: string[];
+  /** Which code-drawn scene illustrates it (see ConceptVisual). */
+  visual: "bank" | "scan" | "city" | "commerce";
 };
 
-export const work: CaseStudy[] = [
+/** Platforms we are set up to build — concepts, not client case studies. */
+export const work: Concept[] = [
   {
-    title: "Global Banking Platform",
+    title: "Digital banking platform",
     category: "ERP / FinTech",
-    body: "End-to-end digital banking transformation for a leading financial institution, serving more than ten million customers across thirty countries. We modernized core banking systems while maintaining zero downtime during migration.",
-    metric: "10M+",
-    metricLabel: "Users",
-    media: "/work/datacenter.jpg",
-    mediaAlt: "Dark data center corridor lined with server racks glowing with red LED indicators",
-    art: "datacenter",
-    needsVerification: true,
+    body: "Accounts, payments, lending and reporting on one modern core — designed to migrate from legacy systems without downtime.",
+    stack: ["Next.js", "Kotlin", "PostgreSQL"],
+    visual: "bank",
   },
   {
-    title: "AI-Powered Healthcare",
+    title: "AI diagnostics assistant",
     category: "AI / HealthTech",
-    body: "A machine learning diagnostic platform that reduced medical imaging analysis time by eighty-five percent for a global healthcare network, helping clinicians reach diagnoses faster without compromising accuracy.",
-    metric: "85%",
-    metricLabel: "Faster",
-    media: "/work/scan.jpg",
-    mediaAlt: "X-ray scan of a ribcage with a red laser scanning line across the thorax",
-    art: "scan",
-    needsVerification: true,
+    body: "Computer-vision models that pre-read medical images and route urgent cases first, with clinicians always in the loop.",
+    stack: ["Python", "PyTorch", "FHIR"],
+    visual: "scan",
   },
   {
-    title: "Smart City Infrastructure",
+    title: "Smart city operations",
     category: "IoT / Cloud",
-    body: "An IoT-enabled smart city platform managing more than fifty thousand connected sensors for traffic, energy, and waste management in real time, built on a resilient multi-cloud architecture.",
-    metric: "50K+",
-    metricLabel: "Sensors",
-    media: "/work/city.jpg",
-    mediaAlt: "Aerial view of a city grid at night with red-glowing data streams along the streets",
-    art: "city",
-    needsVerification: true,
+    body: "Live sensor data for traffic, energy and waste on one control-room dashboard, running on resilient multi-cloud infrastructure.",
+    stack: ["MQTT", "Kubernetes", "AWS"],
+    visual: "city",
   },
   {
-    title: "E-Commerce Ecosystem",
+    title: "Omnichannel commerce",
     category: "Web / Mobile",
-    body: "An omnichannel retail platform processing more than five hundred million dollars in annual transactions with a 99.99% uptime guarantee, unifying web, mobile, and in-store experiences into a single system.",
-    metric: "$500M+",
-    metricLabel: "Revenue",
-    media: "/work/warehouse.jpg",
-    mediaAlt: "Dark automated warehouse interior with towering racking and red accent lighting",
-    art: "warehouse",
-    needsVerification: true,
+    body: "One system for web, mobile and in-store — catalogue, payments, inventory and fulfilment kept in sync in real time.",
+    stack: ["Flutter", "Node.js", "Stripe"],
+    visual: "commerce",
   },
 ];
-
-export type Differentiator = {
-  metric: string;
-  title: string;
-  body: string;
-  needsVerification?: true;
-};
-
-export const whyUs: Differentiator[] = [
-  {
-    metric: "3×",
-    title: "Rapid Delivery",
-    body: "Agile methodology with two-week sprint cycles. We ship faster without sacrificing quality.",
-  },
-  {
-    metric: "0",
-    title: "Enterprise Security",
-    body: "SOC 2 and ISO 27001 compliant. Zero-trust architecture and twenty-four-seven monitoring protect every engagement.",
-    // Compliance claim — must match current, valid certifications before launch.
-    needsVerification: true,
-  },
-  {
-    metric: "50+",
-    title: "Global Scale",
-    body: "Multi-region deployments serving millions of users across more than fifty countries.",
-  },
-  {
-    metric: "200+",
-    title: "Dedicated Teams",
-    body: "Two hundred-plus senior engineers with deep domain expertise across finance, health, retail, and beyond.",
-  },
-];
-
-export const testimonial = {
-  quote:
-    "Calcify International transformed our legacy banking infrastructure into a modern, scalable platform. Their team's expertise in ERP systems and enterprise architecture is unmatched.",
-  name: "James Richardson",
-  role: "CTO, Global Finance Corp",
-  /** Publishing a named quote requires documented consent. Not yet on file. */
-  needsVerification: true as const,
-};
-
-export const cta = {
-  h2: "Let's Build Something Extraordinary",
-  body: "Ready to transform your business with cutting-edge technology? Let's discuss your next project and create solutions that drive real impact.",
-  primary: { label: "Chat on WhatsApp", href: brand.whatsapp },
-  // Placeholder until a real contact-form endpoint is wired — see Section 9.
-  secondary: { label: "Send Us a Message", href: `mailto:${brand.email}` },
-};
 
 export const footer = {
   tagline:
-    "Engineering tomorrow's digital infrastructure. We build transformative technology solutions for the world's most ambitious enterprises.",
+    "Engineering tomorrow's digital infrastructure — ERP, AI, cloud and mobile, designed and built by one senior team.",
   columns: [
     {
       heading: "Company",
       links: [
         { label: "About Us", href: "/about" },
-        { label: "Our Team", href: "/about#team" },
-        { label: "Careers", href: "/contact" },
+        { label: "How we work", href: "/about#how" },
         { label: "Contact", href: "/contact" },
       ],
     },
@@ -265,14 +156,16 @@ export const footer = {
     },
     {
       /**
-       * Case Studies points at the on-page #work section, which is real.
-       * Blog, Documentation and Privacy Policy have NO destination yet —
-       * they are intentionally omitted rather than shipped as 404s.
-       * Restore them once the pages exist. See Section 10.
+       * Blog, Documentation and Privacy Policy have no destination yet —
+       * they are omitted rather than shipped as 404s.
        */
-      heading: "Resources",
-      links: [{ label: "Case Studies", href: "/#work" }],
+      heading: "Explore",
+      links: [
+        { label: "What we build", href: "/#work" },
+        { label: "How we build", href: "/#build" },
+        { label: "Process", href: "/#process" },
+      ],
     },
   ],
-  copyright: "© 2026 Calcify International. All rights reserved.",
+  copyright: `© ${new Date().getFullYear()} Calcify International. All rights reserved.`,
 };

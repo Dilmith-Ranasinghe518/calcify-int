@@ -1,0 +1,289 @@
+.section {
+  position: relative;
+  border-top: 1px solid var(--c-line);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1rem, 2vw, 2rem);
+  width: max-content;
+  height: min(68vh, 640px);
+  padding: 0 4vw;
+  will-change: transform;
+}
+
+.intro {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: min(34vw, 460px);
+  padding: 0.5rem 2vw 0.5rem 0;
+}
+
+.kicker,
+.hint {
+  font: 500 0.7rem/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-subtle);
+}
+
+.intro h2 {
+  font-size: clamp(2.6rem, 5.2vw, 5.8rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.intro p {
+  max-width: 34ch;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+
+.hint i {
+  display: inline-block;
+  margin-left: 0.4rem;
+  font-style: normal;
+  color: var(--c-accent);
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+.card {
+  display: grid;
+  flex: none;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: min(46vw, 760px);
+  border: 1px solid var(--c-line-2);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--c-surface);
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+}
+
+.mediaInner {
+  position: absolute;
+  inset: 0 -8%;
+}
+
+.mediaInner img {
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .mediaInner img {
+  transform: scale(1.05);
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgb(5 5 5 / 0.65));
+  pointer-events: none;
+}
+
+.tag,
+.num {
+  position: absolute;
+  top: 1rem;
+  z-index: 1;
+  font: 500 0.68rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tag {
+  left: 1rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  background: rgb(5 5 5 / 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.num {
+  right: 1.1rem;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem 2rem;
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.body h3 {
+  grid-column: 1;
+  font-size: clamp(1.4rem, 2.1vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.body p {
+  grid-column: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--c-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.stack {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.stack li {
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--c-line-2);
+  border-radius: 999px;
+  font: 500 0.7rem/1 var(--font-mono);
+  color: var(--c-accent-2);
+  white-space: nowrap;
+}
+
+.outro {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: min(34vw, 440px);
+  padding-left: 2vw;
+}
+
+.outro p {
+  font-size: clamp(2rem, 3.6vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.progress {
+  position: absolute;
+  left: 4vw;
+  right: 4vw;
+  bottom: 2.2rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  font: 500 0.72rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+.count {
+  color: var(--c-ink);
+}
+
+.count small {
+  color: var(--c-subtle);
+  font-size: inherit;
+}
+
+.rail {
+  height: 1px;
+  background: var(--c-line-2);
+}
+
+.rail i {
+  display: block;
+  height: 100%;
+  background: var(--c-accent);
+  transform-origin: left;
+}
+
+/* Reduced motion: a plain stacked list. */
+.section[data-static="true"] .sticky {
+  position: relative;
+  height: auto;
+  padding: 7rem 4vw;
+}
+
+.section[data-static="true"] .track {
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+.section[data-static="true"] .card,
+.section[data-static="true"] .intro,
+.section[data-static="true"] .outro {
+  width: 100%;
+}
+
+.section[data-static="true"] .media {
+  aspect-ratio: 16 / 8;
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@media (max-width: 900px) {
+  .track {
+    height: min(72vh, 620px);
+    padding: 0 1.25rem;
+  }
+  .intro {
+    width: 78vw;
+  }
+  .card {
+    width: 84vw;
+  }
+  .body {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+  .stack {
+    grid-column: 1;
+    grid-row: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .outro {
+    width: 78vw;
+  }
+  .progress {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: 1.5rem;
+  }
+  .label {
+    display: none;
+  }
+}

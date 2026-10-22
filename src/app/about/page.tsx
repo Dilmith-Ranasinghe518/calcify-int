@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import StudioSubpage from "@/components/StudioSubpage";
+import AboutPage from "@/components/pages/AboutPage";
 
 export const metadata: Metadata = {
   title: "About — Calcify International",
-  description: "A software studio for ambitious companies.",
+  description: "A software studio for ambitious companies: strategy, design and engineering under one roof.",
 };
 
-export default function AboutPage() {
-  return <StudioSubpage page="about" />;
+export default function About() {
+  return <AboutPage />;
 }

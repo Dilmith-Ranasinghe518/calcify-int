@@ -1,19 +1,39 @@
 import type { Metadata } from "next";
-import { Onest } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, Onest } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import Nav from "@/components/ui/Nav";
 import Preloader from "@/components/ui/Preloader";
 import Footer from "@/components/sections/Footer";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import ScrollProgress from "@/components/motion/ScrollProgress";
+import Cursor from "@/components/motion/Cursor";
 import { brand } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
-// Onest carries display and body. One variable family instead of three
-// static ones: fewer requests, and it is the same typeface the reference
-// site uses, free under the OFL via Google Fonts.
+// Three voices, all OFL via Google Fonts:
+// Onest carries display and body; Instrument Serif italic is the accent
+// (the emphasised word in a headline); JetBrains Mono is the system voice —
+// labels, data, code and the terminal.
 const onest = Onest({
   variable: "--font-onest",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -24,7 +44,7 @@ export const metadata: Metadata = {
   title:
     "Calcify International — Enterprise Digital Infrastructure & AI Solutions",
   description:
-    "Calcify International builds ERP, AI, cloud, and cybersecurity solutions for the world's most ambitious enterprises. 500+ projects delivered across 50+ countries.",
+    "Calcify International designs and engineers ERP platforms, AI systems, cloud infrastructure and mobile apps for ambitious companies — one senior team, from blueprint to launch.",
   openGraph: {
     url: SITE_URL,
     title:
@@ -56,7 +76,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${onest.variable} h-full`}
+      className={`${onest.variable} ${serif.variable} ${mono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-void text-ink font-sans">
         {/*
@@ -73,10 +93,8 @@ export default function RootLayout({
               "@type": "Organization",
               name: brand.name,
               url: SITE_URL,
-              logo: `${SITE_URL}/logo.svg`,
               email: brand.email,
               telephone: brand.phone,
-              foundingDate: "2015",
               description:
                 "Calcify International builds ERP, AI, cloud, and cybersecurity solutions for enterprise clients.",
             }),
@@ -84,17 +102,12 @@ export default function RootLayout({
         />
         {/* Overlay, not a gate — the page renders beneath it regardless. */}
         <Preloader />
+        <SmoothScroll />
+        <ScrollProgress />
+        <Cursor />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        {/*
-          Static atmosphere: a fine grid and a low red wash. CSS only — no
-          WebGL, no canvas, nothing to initialise before first paint.
-        */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-0 bg-atmosphere"
-        />
         <Nav />
         <main id="main" className="relative z-10 flex-1">
           {children}

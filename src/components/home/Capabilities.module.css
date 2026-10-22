@@ -1,0 +1,183 @@
+.section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 9rem 4vw;
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: end;
+  gap: 3rem;
+  margin: 8vh 0 4.5rem;
+}
+
+.title {
+  font-size: clamp(2.6rem, 6vw, 6.6rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.head p {
+  max-width: 420px;
+  color: var(--c-muted);
+  line-height: 1.55;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 14px;
+}
+
+.wide {
+  grid-column: span 2;
+}
+
+.tall {
+  grid-row: span 2;
+}
+
+.base {
+  grid-column: span 1;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 340px;
+  border-radius: 18px;
+}
+
+.visual {
+  position: relative;
+  flex: 1;
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.copy {
+  position: relative;
+  padding: 0 1.75rem 1.75rem;
+}
+
+.index {
+  font: 500 0.7rem/1 var(--font-mono);
+  color: var(--c-accent);
+}
+
+.copy h3 {
+  margin-top: 0.7rem;
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.copy p {
+  max-width: 38ch;
+  margin-top: 0.55rem;
+  color: var(--c-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* The whole card is the link; the circle is just its visible handle. */
+.cardLink {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--c-line-2);
+  border-radius: 50%;
+  color: var(--c-ink);
+  transition: background 0.25s, border-color 0.25s, transform 0.3s;
+}
+
+.card:hover .arrow {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  transform: rotate(45deg);
+}
+
+.more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+}
+
+.more > span {
+  margin-right: 0.5rem;
+  font: 500 0.7rem/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-subtle);
+}
+
+.chip {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--c-line-2);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.chip:hover {
+  color: var(--c-ink);
+  border-color: var(--c-accent);
+}
+
+.more :global(.text-link) {
+  margin-left: auto;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 6rem 1.25rem;
+  }
+  .head {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 5vh 0 2.5rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .wide {
+    grid-column: span 1;
+  }
+  .card {
+    min-height: 300px;
+  }
+  .more :global(.text-link) {
+    margin-left: 0;
+  }
+}
