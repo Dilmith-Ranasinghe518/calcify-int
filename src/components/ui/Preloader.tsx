@@ -1,29 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Wordmark from "./Wordmark";
+import { lockScroll } from "@/lib/scroll";
+import { finishIntro, markIntroPending } from "@/lib/intro";
 
 /**
- * Intro loading overlay.
+ * Intro loading overlay — a short boot sequence on every full page load.
  *
  * Design decisions that matter:
  *
  * - It is an *overlay*, not a gate. The page renders underneath it from the
  *   first paint, so if JS fails, is blocked, or the observer never runs, the
  *   visitor simply sees the site. Nothing is ever trapped behind it.
- * - It dismisses on `window.load` OR a hard 2s cap, whichever comes first.
- *   A preloader that waits indefinitely on a slow asset is how sites end up
- *   showing a spinner forever.
- * - It runs once per browsing session (sessionStorage), so internal
- *   navigation and reloads while working don't replay it.
+ * - It lifts once the page has loaded and the intro has had its minimum
+ *   beat, and never later than a hard cap. A loader that waits indefinitely
+ *   on a slow asset is how sites end up showing a spinner forever.
+ * - The first visit in a session gets the full sequence; reloads after that
+ *   get a quicker one. Client-side navigation never replays it — the route
+ *   curtain (app/template.tsx) handles page changes.
  * - Skipped entirely under prefers-reduced-motion.
  *
  * Worth knowing: a preloader always *worsens* measured LCP, because it covers
- * the content that would otherwise have painted. This one is capped and
- * one-shot to keep that cost bounded.
+ * the content that would otherwise have painted. The caps keep that bounded.
  */
 const SESSION_KEY = "calcify:intro-shown";
-const MAX_MS = 2000;
+const TIMING = {
+  first: { min: 1700, cap: 2600 },
+  repeat: { min: 900, cap: 1500 },
+};
 
 export default function Preloader() {
   const [active, setActive] = useState(false);
@@ -32,9 +36,7 @@ export default function Preloader() {
   const raf = useRef<number | null>(null);
 
   useEffect(() => {
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return;
 
     let seen = false;
@@ -43,17 +45,22 @@ export default function Preloader() {
     } catch {
       // Private mode / storage disabled — treat as unseen, still capped.
     }
-    if (seen) return;
+    const { min, cap } = seen ? TIMING.repeat : TIMING.first;
 
-    // Deliberately set in the effect. Whether to show at all depends on
-    // matchMedia and sessionStorage, neither of which exists during SSR, so a
-    // lazy initialiser would render `true` on the client and `false` on the
-    // server — a hydration mismatch. One extra render on first visit is the
-    // correct trade here.
+    // Synchronous, so effects further down the tree (the hero crystal) see it.
+    markIntroPending();
+    // Deliberately set in the effect: whether to show depends on matchMedia,
+    // which doesn't exist during SSR, so a lazy initialiser would cause a
+    // hydration mismatch. One extra render is the correct trade here.
     // eslint-disable-next-line react-hooks/set-state-in-effect -- see above
     setActive(true);
-    // Lock scroll only while the overlay is genuinely up.
-    document.body.style.overflow = "hidden";
+    lockScroll(true);
+    let locked = true;
+    const unlock = () => {
+      if (!locked) return;
+      locked = false;
+      lockScroll(false);
+    };
 
     const started = performance.now();
     let done = false;
@@ -68,77 +75,73 @@ export default function Preloader() {
       }
       setPct(100);
       setLeaving(true);
-      document.body.style.overflow = "";
-      // Matches the exit transition duration below.
-      window.setTimeout(() => setActive(false), 700);
+      unlock();
+      finishIntro();
+      // Matches the exit wipe in globals.css.
+      window.setTimeout(() => setActive(false), 900);
     };
 
     // Progress is time-based and eased — it represents "the intro is playing",
     // not real asset bytes, and pretending otherwise would be dishonest.
     const tick = () => {
-      const elapsed = performance.now() - started;
-      const p = Math.min(elapsed / MAX_MS, 1);
-      const eased = 1 - Math.pow(1 - p, 2);
-      setPct(Math.round(eased * 100));
+      const p = Math.min((performance.now() - started) / min, 1);
+      setPct(Math.round((1 - Math.pow(1 - p, 2.2)) * 100));
       if (p < 1 && !done) raf.current = requestAnimationFrame(tick);
     };
     raf.current = requestAnimationFrame(tick);
 
     const onLoad = () => {
-      // Let the intro breathe for a beat even on a fast connection, but never
-      // exceed the cap.
-      const elapsed = performance.now() - started;
-      window.setTimeout(finish, Math.max(0, 650 - elapsed));
+      window.setTimeout(finish, Math.max(0, min - (performance.now() - started)));
     };
-
     if (document.readyState === "complete") onLoad();
     else window.addEventListener("load", onLoad);
-
-    const cap = window.setTimeout(finish, MAX_MS);
+    const capTimer = window.setTimeout(finish, cap);
 
     return () => {
       window.removeEventListener("load", onLoad);
-      window.clearTimeout(cap);
+      window.clearTimeout(capTimer);
       if (raf.current) cancelAnimationFrame(raf.current);
-      document.body.style.overflow = "";
+      unlock();
+      if (!done) finishIntro();
     };
   }, []);
 
   if (!active) return null;
+
+  // Boot log lines surface as the counter passes their threshold.
+  const log = [
+    [8, "resolving modules"],
+    [34, "compiling interface"],
+    [62, "connecting the lattice"],
+    [88, "ready"],
+  ] as const;
 
   return (
     <div
       // Not a focus trap and not announced: the page beneath is the real
       // content, and this disappears on its own.
       aria-hidden="true"
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-void"
-      style={{
-        transform: leaving ? "translateY(-100%)" : "translateY(0)",
-        transition: "transform 700ms cubic-bezier(0.76, 0, 0.24, 1)",
-      }}
+      className="preloader"
+      data-leaving={leaving}
     >
-      <div
-        style={{
-          opacity: leaving ? 0 : 1,
-          transition: "opacity 300ms ease-out",
-        }}
-      >
-        <Wordmark />
+      <div className="preloader-word">
+        {"calcify".split("").map((c, i) => (
+          <span key={i} style={{ animationDelay: `${i * 0.05}s` }}>
+            {c}
+          </span>
+        ))}
+        <i />
       </div>
-
-      {/* Progress rail */}
-      <div className="mt-10 h-px w-56 overflow-hidden bg-line sm:w-72">
-        <div
-          className="h-full bg-signal"
-          style={{
-            width: `${pct}%`,
-            transition: "width 120ms linear",
-          }}
-        />
-      </div>
-
-      <div className="mt-5 text-xs font-medium tabular-nums tracking-[0.2em] text-muted">
-        {String(pct).padStart(3, "0")}
+      <div className="preloader-count">{String(pct).padStart(3, "0")}</div>
+      <ul className="preloader-log">
+        {log.map(([at, text]) => (
+          <li key={text} data-on={pct >= at}>
+            <span>›</span> {text} {pct >= at && <em>ok</em>}
+          </li>
+        ))}
+      </ul>
+      <div className="preloader-rail">
+        <i style={{ transform: `scaleX(${pct / 100})` }} />
       </div>
     </div>
   );
