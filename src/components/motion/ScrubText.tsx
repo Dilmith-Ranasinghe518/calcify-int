@@ -1,7 +1,8 @@
 "use client";
 
-import { useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 type Word = { text: string; accent: boolean };
 

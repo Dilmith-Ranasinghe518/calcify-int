@@ -175,7 +175,7 @@
     margin: 6vh 0 4vh;
   }
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 3rem;
   }
   .shellOut {

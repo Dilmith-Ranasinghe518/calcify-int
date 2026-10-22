@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Blueprint from "./Blueprint";
 import CodeEditor from "./CodeEditor";
@@ -8,6 +8,7 @@ import ShipLog from "./ShipLog";
 import LiveDashboard from "./LiveDashboard";
 import { scrambleTo } from "@/components/motion/Scramble";
 import styles from "./build.module.css";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const STAGES = [
   {

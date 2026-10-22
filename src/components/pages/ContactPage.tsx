@@ -75,7 +75,7 @@ export default function ContactPage() {
               </li>
             ))}
           </ol>
-          <dl className={styles.details}>
+          <dl className={styles.details} data-touch-pad>
             <div>
               <dt>Email</dt>
               <dd>

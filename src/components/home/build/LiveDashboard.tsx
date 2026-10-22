@@ -22,7 +22,8 @@ const EVENTS: Omit<Event, "id">[] = [
   { text: "Forecast updated by AI model v3", tone: "info" },
 ];
 
-const money = (v: number) => `$${(v / 1_000_000).toFixed(2)}M`;
+// Full dollars, so every tick visibly moves the figure.
+const money = (v: number) => `$${Math.round(v).toLocaleString("en-US")}`;
 const count = (v: number) => Math.round(v).toLocaleString("en-US");
 const pct = (v: number) => `${v.toFixed(1)}%`;
 const seedSpark = (base: number) => Array.from({ length: 12 }, (_, i) => base + Math.sin(i * 0.9) * 6 + i * 1.6);

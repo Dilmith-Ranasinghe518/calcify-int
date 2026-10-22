@@ -265,7 +265,7 @@
     width: 84vw;
   }
   .body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 1.25rem;
   }
   .stack {

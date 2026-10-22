@@ -164,12 +164,13 @@
     padding: 6rem 1.25rem;
   }
   .head {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
     margin: 5vh 0 2.5rem;
   }
   .grid {
-    grid-template-columns: 1fr;
+    /* minmax(0, …): the card illustrations scale down rather than stretching the column. */
+    grid-template-columns: minmax(0, 1fr);
   }
   .wide {
     grid-column: span 1;

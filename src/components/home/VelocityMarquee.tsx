@@ -4,7 +4,6 @@ import {
   motion,
   useAnimationFrame,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -12,6 +11,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import styles from "./VelocityMarquee.module.css";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const DISCIPLINES = ["ERP", "AI", "Cloud", "Mobile", "Web", "Security", "Data", "QA"];
 const STACK = ["Next.js", "React", "Flutter", "Kotlin", "Swift", "Python", "Node.js", "PostgreSQL", "AWS", "Azure", "GCP", "Kubernetes", "TensorFlow", "OpenAI", "SAP", "Odoo"];

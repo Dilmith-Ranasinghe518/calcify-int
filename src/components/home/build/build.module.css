@@ -107,6 +107,7 @@
 .window {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   border: 1px solid var(--c-line-2);
   border-radius: 14px;
   background: #0a0b0e;
@@ -673,8 +674,8 @@
 
 .dKpi strong {
   display: block;
-  margin-top: 8px;
-  font-size: 24px;
+  margin-top: 6px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
@@ -926,7 +927,9 @@
     padding: 5.25rem 1.25rem 1.25rem;
   }
   .layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, …) so the window's long address text truncates instead of
+       widening the column past a 320px screen. */
+    grid-template-columns: minmax(0, 1fr);
     align-content: start;
     gap: 1.25rem;
     margin-top: 1.5rem;
@@ -950,7 +953,7 @@
     aspect-ratio: 4 / 3;
   }
   .editor {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .tree {
     display: none;

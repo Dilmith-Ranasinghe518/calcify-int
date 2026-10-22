@@ -38,7 +38,7 @@ export default function ClosingCta({ index = "06" }: { index?: string }) {
                 WhatsApp us
               </a>
             </div>
-            <dl className={styles.details}>
+            <dl className={styles.details} data-touch-pad>
               <div>
                 <dt>Email</dt>
                 <dd>

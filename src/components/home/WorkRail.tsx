@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -14,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import ConceptVisual from "./ConceptVisual";
 import { work } from "@/lib/content";
 import styles from "./WorkRail.module.css";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 function Card({ item, index, progress }: { item: (typeof work)[number]; index: number; progress: MotionValue<number> }) {
   // The scene drifts against the direction of travel, so each frame reads as a window.

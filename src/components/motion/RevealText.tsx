@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 type Tag = "h1" | "h2" | "h3" | "p" | "div";
 
