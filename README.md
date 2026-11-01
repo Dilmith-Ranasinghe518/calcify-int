@@ -10,5 +10,8 @@ npm run lint
 npm run build && npm start
 ```
 
-Copy lives in `src/lib/content.ts`. The contact form has no backend yet: it
-composes an email and opens the visitor's mail app.
+Copy lives in `src/lib/content.ts`.
+
+## Contact form email
+
+The contact form sends mail through the `hello@calcifyint.com` mailbox (Spacemail SMTP): an alert to the team and a designed confirmation to the visitor. Copy `.env.example` to `.env.local` for local work, and set the same variables in Vercel for production. Never commit the password.

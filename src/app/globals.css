@@ -41,6 +41,7 @@
   --c-accent: #d4ff3f;
   --c-accent-2: #b9a8ff;
   --c-amber: #ffb454;
+  --c-danger: #ff7a7a;
   --accent-rgb: 212 255 63;
   --accent-2-rgb: 185 168 255;
   --ink-rgb: 242 241 236;
@@ -245,6 +246,11 @@ body {
 
 .btn-ghost:hover {
   border-color: var(--c-accent);
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
 }
 
 .btn-lg {

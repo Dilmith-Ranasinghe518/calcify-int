@@ -24,9 +24,9 @@ export const nav = {
 export const brand = {
   name: "Calcify International",
   short: "Calcify",
-  phone: "+94 71 717 0333",
-  whatsapp: "https://wa.me/94717170333",
-  email: "support.calcifylabs@gmail.com",
+  phone: "+94 70 160 0215",
+  whatsapp: "https://wa.me/94701600215",
+  email: "hello@calcifyint.com",
 };
 
 /** Offer facts, not track record — each one is true of every engagement. */
