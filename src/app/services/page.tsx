@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import ServicesPage from "@/components/pages/ServicesPage";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Services — Calcify International",
-  description: "ERP, web, AI, mobile, cloud, security, data, QA and digital transformation — designed and built by one senior team.",
-};
+export const metadata = pageMetadata(
+  "/services",
+  "Software Development Services | Calcify International",
+  "Explore custom ERP, web and mobile development, AI, cloud, cybersecurity, data analytics, QA and digital transformation services from Calcify International.",
+);
 
 export default function Services() {
   return <ServicesPage />;

@@ -27,8 +27,8 @@ export default function ServicesPage() {
       <SubHero
         index="01"
         eyebrow="Services"
-        label="Ideas into momentum."
-        lines={["Ideas into", <em key="em">momentum.</em>]}
+        label="Software development services"
+        lines={["Software ", <em key="em">development services</em>]}
         intro="Nine disciplines, one senior team. We turn complex operations, bold products and new opportunities into systems that move the business forward."
         aside={
           <nav className={styles.jump} aria-label="Jump to a service">
@@ -60,8 +60,8 @@ export default function ServicesPage() {
                   <span className={styles.cardIndex}>{String(i + 1).padStart(2, "0")}</span>
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
-                  <Link href="/contact" className="text-link">
-                    Discuss {s.title.replace(" Development", "").replace(" Services", "").toLowerCase()} <span aria-hidden="true">↗</span>
+                  <Link href={s.path} prefetch={false} className="text-link">
+                    Explore {s.title.toLowerCase()} <span aria-hidden="true">↗</span>
                   </Link>
                 </div>
                 <div className={styles.serviceVisual} aria-hidden="true">
