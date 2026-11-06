@@ -15,7 +15,6 @@ const FEATURED: { slug: string; visual: VisualKind; blurb: string; size: "wide" 
   { slug: "security", visual: "security", size: "wide", blurb: "Zero-trust architecture, assessments and monitoring around everything we ship." },
 ];
 
-const titleOf = (slug: string) => services.find((s) => s.slug === slug)?.title.replace(" Development", "") ?? slug;
 const MORE = services.filter((s) => !FEATURED.some((f) => f.slug === s.slug));
 
 export default function Capabilities() {
@@ -39,31 +38,37 @@ export default function Capabilities() {
       </div>
 
       <div className={styles.grid}>
-        {FEATURED.map((f, i) => (
-          <Reveal key={f.slug} delay={(i % 3) * 90} className={styles[f.size]}>
-            <Spotlight className={styles.card} id={`cap-${f.slug}`}>
-              <div className={styles.visual} aria-hidden="true">
-                <ServiceVisual kind={f.visual} />
-              </div>
-              <div className={styles.copy}>
-                <span className={styles.index}>0{i + 1}</span>
-                <h3>{titleOf(f.slug)}</h3>
-                <p>{f.blurb}</p>
-              </div>
-              <Link href={`/services#${f.slug}`} className={styles.cardLink} aria-label={`${titleOf(f.slug)} — learn more`}>
-                <span aria-hidden="true" className={styles.arrow}>
-                  ↗
-                </span>
-              </Link>
-            </Spotlight>
-          </Reveal>
-        ))}
+        {FEATURED.map((f, i) => {
+          const service = services.find(({ slug }) => slug === f.slug);
+          if (!service) return null;
+          const title = service.title.replace(" Development", "");
+
+          return (
+            <Reveal key={f.slug} delay={(i % 3) * 90} className={styles[f.size]}>
+              <Spotlight className={styles.card} id={`cap-${f.slug}`}>
+                <div className={styles.visual} aria-hidden="true">
+                  <ServiceVisual kind={f.visual} />
+                </div>
+                <div className={styles.copy}>
+                  <span className={styles.index}>0{i + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{f.blurb}</p>
+                </div>
+                <Link href={service.path} prefetch={false} className={styles.cardLink} aria-label={`Explore ${service.title}`}>
+                  <span aria-hidden="true" className={styles.arrow}>
+                    ↗
+                  </span>
+                </Link>
+              </Spotlight>
+            </Reveal>
+          );
+        })}
       </div>
 
       <div className={styles.more}>
         <span>Also</span>
         {MORE.map((s) => (
-          <Link key={s.slug} href={`/services#${s.slug}`} className={styles.chip}>
+          <Link key={s.slug} href={s.path} prefetch={false} className={styles.chip}>
             {s.title}
           </Link>
         ))}

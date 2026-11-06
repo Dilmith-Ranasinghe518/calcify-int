@@ -214,6 +214,99 @@
 }
 
 /* ===== Services ===== */
+.detailHero,
+.detailSection {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 6rem) 4vw;
+}
+
+.detailHero {
+  padding-top: clamp(8rem, 12vw, 11rem);
+}
+
+.breadcrumbs,
+.breadcrumbs li,
+.detailLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.breadcrumbs {
+  color: var(--c-muted);
+  font: 500 0.8rem/1.5 var(--font-mono);
+}
+
+.breadcrumbs a {
+  color: var(--c-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.detailTitle {
+  max-width: 16ch;
+  margin-top: 2rem;
+  font-size: clamp(2.8rem, 7vw, 7.5rem);
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.detailHero p,
+.detailSection p {
+  max-width: 64ch;
+  color: var(--c-muted);
+  line-height: 1.65;
+  margin-top: 1rem;
+}
+
+.detailHero p {
+  margin-bottom: 2rem;
+  font-size: 1.125rem;
+}
+
+.detailSection {
+  border-top: 1px solid var(--c-line);
+}
+
+.detailSection h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 14px;
+  margin-top: 1.5rem;
+}
+
+.detailCard {
+  padding: clamp(1rem, 3vw, 1.8rem);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+}
+
+.detailCard h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.detailSection > a,
+.detailLinks {
+  margin-top: 1.5rem;
+}
+
+.detailLinks {
+  gap: 1.5rem;
+}
+
 .serviceList {
   display: grid;
   gap: 14px;
