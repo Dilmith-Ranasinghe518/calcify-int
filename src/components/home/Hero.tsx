@@ -76,15 +76,10 @@ export default function Hero() {
         </h1>
 
         <div className={styles.bottom}>
-          <motion.p
-            className={styles.lede}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <p className={styles.lede}>
             We design and engineer the platforms ambitious companies need to run on — ERP, customer apps and AI
             that actually ships.
-          </motion.p>
+          </p>
           <motion.div
             className={styles.actions}
             initial={{ opacity: 0, y: 16 }}
