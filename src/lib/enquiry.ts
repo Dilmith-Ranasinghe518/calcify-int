@@ -29,6 +29,8 @@ export type EnquiryState =
   | { status: "sent"; email: string; confirmed: boolean }
   /** Too many attempts from this visitor or for this address. */
   | { status: "limited" }
+  /** reCAPTCHA judged the submission automated (or its check couldn't run). */
+  | { status: "unverified" }
   /** Sending failed or isn't set up; the page offers direct contact details. */
   | { status: "failed" };
 

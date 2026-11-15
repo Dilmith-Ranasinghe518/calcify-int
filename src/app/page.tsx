@@ -1,47 +1,20 @@
 import HomeExperience from "@/components/HomeExperience";
-import { brand } from "@/lib/content";
-import { ORGANIZATION_ID, pageMetadata, SITE_URL } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata, SITE_DESCRIPTION, webPageSchema } from "@/lib/site";
 
-const description =
-  "Calcify International is a software development company in Colombo, Sri Lanka, building custom ERP systems, AI solutions, web and mobile apps, and cloud platforms.";
+const title = "Software Development Company in Sri Lanka | Calcify International";
 
-export const metadata = pageMetadata(
-  "/",
-  "Software Development Company in Sri Lanka | Calcify International",
-  description,
-);
+export const metadata = pageMetadata("/", title, SITE_DESCRIPTION);
 
-const siteSchema = {
+const schema = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": ORGANIZATION_ID,
-      name: brand.name,
-      url: `${SITE_URL}/`,
-      logo: `${SITE_URL}/icon`,
-      email: brand.email,
-      telephone: brand.phone,
-      description,
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      url: `${SITE_URL}/`,
-      name: brand.name,
-      alternateName: brand.short,
-      publisher: { "@id": ORGANIZATION_ID },
-    },
-  ],
+  ...webPageSchema("WebPage", "/", title, SITE_DESCRIPTION),
 };
 
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={schema} />
       <HomeExperience />
     </>
   );

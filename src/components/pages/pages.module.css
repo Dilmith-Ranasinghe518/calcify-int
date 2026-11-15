@@ -533,6 +533,23 @@
   color: var(--c-subtle);
 }
 
+.recaptchaNote {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--c-subtle);
+}
+
+.recaptchaNote a {
+  color: var(--c-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.recaptchaNote a:hover {
+  color: var(--c-ink);
+}
+
 /* Off-screen rather than display:none, which many bots skip. */
 .trap {
   position: absolute;

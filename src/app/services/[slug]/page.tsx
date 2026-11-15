@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { brand, services } from "@/lib/content";
-import { ORGANIZATION_ID, pageMetadata, SITE_URL } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, ORGANIZATION_ID, pageMetadata, SITE_URL, webPageSchema } from "@/lib/site";
 import styles from "@/components/pages/pages.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -21,8 +22,10 @@ async function getService(params: Props["params"]) {
 
 export async function generateMetadata({ params }: Props) {
   const service = await getService(params);
-  return pageMetadata(service.path, `${service.title} | ${brand.name}`, service.description);
+  return pageMetadata(service.path, serviceTitle(service.title), service.description);
 }
+
+const serviceTitle = (name: string) => `${name} in Sri Lanka | ${brand.name}`;
 
 export default async function ServicePage({ params }: Props) {
   const service = await getService(params);
@@ -33,35 +36,39 @@ export default async function ServicePage({ params }: Props) {
     { name: service.title, path: service.path },
   ];
   const url = `${SITE_URL}${service.path}`;
+  const title = serviceTitle(service.title);
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
       {
+        ...webPageSchema("WebPage", service.path, title, service.description),
+        mainEntity: { "@id": `${url}#service` },
+      },
+      {
         "@type": "Service",
         "@id": `${url}#service`,
         name: service.title,
+        serviceType: service.title,
         description: service.description,
         url,
         provider: { "@id": ORGANIZATION_ID },
+        areaServed: "Worldwide",
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: `${service.title} services`,
+          itemListElement: service.capabilities.map(({ title: name, body }) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name, description: body },
+          })),
+        },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbs.map(({ name, path }, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name,
-          item: `${SITE_URL}${path}`,
-        })),
-      },
+      breadcrumbSchema(breadcrumbs),
     ],
   };
 
   return (
     <article className="studio-subpage">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={schema} />
       <header className={styles.detailHero} data-lattice="calm">
         <nav aria-label="Breadcrumb">
           <ol className={styles.breadcrumbs}>

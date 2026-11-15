@@ -2,6 +2,7 @@ import Link from "next/link";
 import { footer, brand } from "@/lib/content";
 import Wordmark from "@/components/ui/Wordmark";
 import BackToTop from "@/components/ui/BackToTop";
+import CookieSettingsButton from "@/components/ui/CookieSettingsButton";
 
 export default function Footer() {
   return (
@@ -49,7 +50,10 @@ export default function Footer() {
 
         <div className="mt-16 flex items-center justify-between gap-6 border-t border-line pt-6">
           <p className="eyebrow">{footer.copyright}</p>
-          <BackToTop />
+          <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
+            <CookieSettingsButton />
+            <BackToTop />
+          </div>
         </div>
       </div>
 

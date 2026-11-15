@@ -812,3 +812,76 @@ a:focus-visible .wordmark-dot {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ===== COOKIE BANNER (components/ui/CookieBanner.tsx) ===== */
+/* Above the page and nav, below the route curtain (380) and preloader (400). */
+.cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 350;
+  max-width: 420px;
+  padding: 1.25rem;
+  border: 1px solid var(--c-line-2);
+  border-radius: var(--radius-card);
+  background: var(--c-surface);
+  box-shadow: 0 24px 60px -20px rgb(0 0 0 / 0.7);
+  color: var(--c-ink);
+  animation: cookie-banner-in 0.6s var(--ease-out-expo) both;
+}
+
+.cookie-banner p {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--c-muted);
+}
+
+.cookie-banner__link {
+  color: var(--c-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cookie-banner__link:hover {
+  color: var(--c-accent);
+}
+
+.cookie-banner__actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.cookie-banner__actions .btn {
+  flex: 1;
+  height: 44px;
+}
+
+@media (min-width: 640px) {
+  .cookie-banner {
+    left: 24px;
+    right: auto;
+    bottom: 24px;
+  }
+}
+
+@keyframes cookie-banner-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner {
+    animation: none;
+  }
+}
+
+/* reCAPTCHA v3 badge: hidden, with Google's required notice shown under the
+   contact form instead (ContactPage.tsx). */
+.grecaptcha-badge {
+  visibility: hidden;
+}

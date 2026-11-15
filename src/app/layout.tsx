@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Instrument_Serif, JetBrains_Mono, Onest } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
@@ -9,7 +10,11 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import ScrollProgress from "@/components/motion/ScrollProgress";
 import Cursor from "@/components/motion/Cursor";
 import Lattice from "@/components/Lattice";
-import { SITE_URL } from "@/lib/site";
+import JsonLd from "@/components/JsonLd";
+import CookieBanner from "@/components/ui/CookieBanner";
+import { CONSENT_DEFAULT_SCRIPT } from "@/lib/consent";
+import { brand } from "@/lib/content";
+import { GA_MEASUREMENT_ID, SITE_DESCRIPTION, SITE_URL, siteSchema } from "@/lib/site";
 
 // Three voices, all OFL via Google Fonts:
 // Onest carries display and body; Instrument Serif italic is the accent
@@ -39,7 +44,37 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Calcify International",
+  title: brand.name,
+  description: SITE_DESCRIPTION,
+  applicationName: brand.name,
+  authors: [{ name: brand.name, url: SITE_URL }],
+  creator: brand.name,
+  publisher: brand.name,
+  category: "technology",
+  formatDetection: { telephone: false, email: false, address: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // Google Search Console / Bing Webmaster Tools ownership checks (HTML tag method).
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08080A",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -56,7 +91,12 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={`${onest.variable} ${serif.variable} ${mono.variable} h-full`}
     >
+      <head>
+        {/* Consent Mode default — must run before gtag.js (see lib/consent.ts). */}
+        {GA_MEASUREMENT_ID && <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />}
+      </head>
       <body className="min-h-full flex flex-col bg-void text-ink font-sans">
+        <JsonLd data={siteSchema} />
         {/* Overlay, not a gate — the page renders beneath it regardless. */}
         <Preloader />
         <SmoothScroll />
@@ -74,7 +114,11 @@ export default function RootLayout({
         <div className="relative z-10">
           <Footer />
         </div>
+        {GA_MEASUREMENT_ID && <CookieBanner />}
       </body>
+      {/* GA4 loads after hydration; page views on client navigation are
+          tracked by GA4 enhanced measurement (browser history events). */}
+      {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
     </html>
   );
 }

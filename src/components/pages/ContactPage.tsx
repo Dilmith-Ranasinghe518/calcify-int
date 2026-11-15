@@ -7,6 +7,8 @@ import { sendEnquiry } from "@/app/contact/actions";
 import Magnetic from "@/components/motion/Magnetic";
 import { brand } from "@/lib/content";
 import { BUDGETS, INTERESTS, type EnquiryState } from "@/lib/enquiry";
+import { getRecaptchaToken, RECAPTCHA_SITE_KEY } from "@/lib/recaptcha";
+import Script from "next/script";
 import styles from "./pages.module.css";
 
 const NEXT = [
@@ -40,14 +42,23 @@ export default function ContactPage() {
   // Dispatching by hand keeps what they typed if there's an error; a plain
   // `action` submit would clear the form. `action` stays on the <form> so an
   // early submit, before the page has hydrated, still posts safely.
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const [verifying, setVerifying] = useState(false);
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    setVerifying(true);
+    data.set("recaptcha", await getRecaptchaToken());
+    setVerifying(false);
     startTransition(() => action(data));
   };
+  const busy = pending || verifying;
 
   return (
     <div className="studio-subpage">
+      {/* Loaded on this page only — it's the only form on the site. */}
+      {RECAPTCHA_SITE_KEY && (
+        <Script src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`} strategy="afterInteractive" />
+      )}
       <SubHero
         index="01"
         eyebrow="Contact"
@@ -204,15 +215,22 @@ export default function ContactPage() {
 
             <div className={styles.submitRow}>
               <Magnetic>
-                <button type="submit" className="btn btn-primary btn-lg" disabled={pending}>
-                  {pending ? "Sending…" : "Send enquiry"} <span aria-hidden="true">↗</span>
+                <button type="submit" className="btn btn-primary btn-lg" disabled={busy}>
+                  {busy ? "Sending…" : "Send enquiry"} <span aria-hidden="true">↗</span>
                 </button>
               </Magnetic>
               <small>You&apos;ll get a confirmation by email.</small>
             </div>
 
+            {/* reCAPTCHA's badge is hidden (globals.css), so Google requires this notice instead. */}
+            <small className={styles.recaptchaNote}>
+              This site is protected by reCAPTCHA and the Google{" "}
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> and{" "}
+              <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">Terms of Service</a> apply.
+            </small>
+
             <AnimatePresence>
-              {(state.status === "failed" || state.status === "limited") && (
+              {(state.status === "failed" || state.status === "limited" || state.status === "unverified") && (
                 <motion.p
                   className={styles.alert}
                   role="alert"
@@ -222,7 +240,9 @@ export default function ContactPage() {
                 >
                   {state.status === "failed"
                     ? "Sorry, your message didn't go through. "
-                    : "That's a few messages in a short time, so please try again later. "}
+                    : state.status === "unverified"
+                      ? "We couldn't confirm this message was sent by a person. Please try again, or turn off any blocker for this page. "
+                      : "That's a few messages in a short time, so please try again later. "}
                   You can also <DirectContact />.
                 </motion.p>
               )}
