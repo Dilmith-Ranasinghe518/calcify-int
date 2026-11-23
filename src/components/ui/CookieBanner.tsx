@@ -34,7 +34,7 @@ export default function CookieBanner() {
       <p>
         We&rsquo;d like to use Google Analytics cookies to understand how people use this site, so we can
         improve it. If you decline, no analytics cookies are set.{" "}
-        <Link href="/contact" className="cookie-banner__link">Questions?</Link>
+        <Link href="/privacy" className="cookie-banner__link">Privacy policy</Link>
       </p>
       <div className="cookie-banner__actions">
         <button type="button" className="btn btn-ghost" onClick={() => choose("denied")}>

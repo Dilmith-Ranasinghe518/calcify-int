@@ -679,3 +679,22 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ===== Legal (privacy policy) ===== */
+.legalList {
+  max-width: 64ch;
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+  color: var(--c-muted);
+  line-height: 1.65;
+}
+
+.legalList li + li {
+  margin-top: 0.6rem;
+}
+
+.legalList strong {
+  color: var(--c-ink);
+  font-weight: 500;
+}

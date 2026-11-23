@@ -246,7 +246,7 @@ export const footer = {
     },
     {
       /**
-       * Blog, Documentation and Privacy Policy have no destination yet —
+       * Blog and Documentation have no destination yet —
        * they are omitted rather than shipped as 404s.
        */
       heading: "Explore",
@@ -254,6 +254,7 @@ export const footer = {
         { label: "What we build", href: "/#work" },
         { label: "How we build", href: "/#build" },
         { label: "Process", href: "/#process" },
+        { label: "Privacy Policy", href: "/privacy" },
       ],
     },
   ],
