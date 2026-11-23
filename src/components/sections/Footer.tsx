@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { footer, brand } from "@/lib/content";
+import { footer, brand, socials } from "@/lib/content";
 import Wordmark from "@/components/ui/Wordmark";
 import BackToTop from "@/components/ui/BackToTop";
 import CookieSettingsButton from "@/components/ui/CookieSettingsButton";
@@ -26,6 +26,18 @@ export default function Footer() {
                   {brand.email}
                 </a>
               </li>
+              {socials.map(({ label, href }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    className="text-sm text-muted transition-colors hover:text-signal"
+                  >
+                    {label} <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

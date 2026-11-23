@@ -27,7 +27,11 @@ export const brand = {
   phone: "+94 70 160 0215",
   whatsapp: "https://wa.me/94701600215",
   email: "hello@calcifyint.com",
+  facebook: "https://www.facebook.com/1479495541909507",
 };
+
+/** Official profiles: linked in the footer and listed as `sameAs` in the Organization schema. */
+export const socials = [{ label: "Facebook", href: brand.facebook }];
 
 /** Offer facts, not track record — each one is true of every engagement. */
 export type Fact = { value: string; label: string };

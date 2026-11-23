@@ -107,6 +107,14 @@ export default function ContactPage() {
                 </a>
               </dd>
             </div>
+            <div>
+              <dt>Facebook</dt>
+              <dd>
+                <a href={brand.facebook} target="_blank" rel="noopener noreferrer me">
+                  Follow us ↗
+                </a>
+              </dd>
+            </div>
           </dl>
         </div>
 

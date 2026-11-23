@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { brand, services } from "./content";
+import { brand, services, socials } from "./content";
 
 /**
  * Canonical site origin, used by metadataBase, the sitemap, robots.txt and
@@ -54,6 +54,7 @@ export const siteSchema = {
         addressCountry: "LK",
       },
       areaServed: "Worldwide",
+      sameAs: socials.map(({ href }) => href),
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "sales",
